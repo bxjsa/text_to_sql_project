@@ -1,0 +1,1238 @@
+{
+  "formulas": {
+    "热源厂采暖季热单耗": {
+      "formula": "q = (Q(t=end) - Q(t=start)) / A * 24 * 120 / ((t=end - t=start) + 1)",
+      "description": "采暖季内，整个供热系统的单位建筑面积或单位供热量所消耗的热量，用于衡量供热系统的能源利用效率和节能水平。\n用采暖季结束时的累计热量 减去 采暖季开始时的累计热量 结果除以 整个热网总供热面积。",
+      "parameters": {
+        "q": {
+          "meaning": "水网单位面积热单耗",
+          "unit": "GJ/㎡·季",
+          "time_info": ""
+        },
+        "Q(t=end)": {
+          "meaning": "热源采暖季结束时的累计热量",
+          "unit": "GJ",
+          "time_info": "2025年3月15日 0:00"
+        },
+        "Q(t=start)": {
+          "meaning": "热源采暖季起始时的累计热量",
+          "unit": "GJ",
+          "time_info": "2024年11月15日 0:00"
+        },
+        "(Q(t=end) - Q(t=start))": {
+          "meaning": "热源厂采暖季的总耗热量/产热量/累计热量",
+          "unit": "",
+          "time_info": ""
+        },
+        "A": {
+          "meaning": "热网总供热面积",
+          "unit": "㎡",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "结束时间和起始时间的时间段内小时数",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Q": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_source_inst_data表中src_id分别为1和2的src_sup_total_hheat；src_id=1的是商河恒泰热源厂，src_id=2是玉泉生物质电厂，若未明确指出哪个热源厂的指标计算，那么热源厂热单耗需要计算两个热源总和的热单耗，总热量需要分别计算src_id为1和2的累计热量的差值，再汇总得到热源厂总热量；因为不同热源src_id的数据data_time不相同，统计热量时不同src_id要分别获取起始时间和结束时间；",
+          "table": "ods_sc01_ntjt_zhgr_heat_source_inst_data",
+          "field": "src_sup_total_hheat",
+          "condition": "src_id IN (1, 2)",
+          "note": "src_id=1的是商河恒泰热源厂，src_id=2是玉泉生物质电厂，若未明确指出哪个热源厂的指标计算，那么热源厂热单耗需要计算两个热源总和的热单耗，总热量需要分别计算src_id为1和2的累计热量的差值，再汇总得到热源厂总热量；因为不同热源src_id的数据data_time不相同，统计热量时不同src_id要分别获取起始时间和结束时间；"
+        },
+        "A": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表中所有stn_id的heat_area之和；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "",
+          "note": "对所有heat_area进行汇总/求和，并且需要包含所有stn_id"
+        }
+      },
+      "keywords": [
+        "热单耗",
+        "采暖季",
+        "产热量",
+        "热源厂"
+      ],
+      "notes": []
+    },
+    "热源厂供暖季热单耗": {
+      "formula": "q = (Q(t=end) - Q(t=start)) / A × (24 × 120) / ((t=end - t=start) + 1)",
+      "description": "步骤一：供暖季热单耗，是通过结束时间累计热量 - 起始时间累计热量的结果，除以问题热源厂的总供热面积。\n步骤二：步骤一结果要转换成供暖季量级，需要将上述结果，按照小时粒度，计算从开始时间到结束时间有多少小时。并将步骤一结果除以小时数，在乘以24（每天的小时数）和 120（供暖季的天数）\n#要记住!!，只有做了步骤二，生成的热单耗单位才是：GJ/㎡·季， 如果没有做步骤二，单位是：GJ/㎡",
+      "parameters": {
+        "q": {
+          "meaning": "水网单位面积热单耗",
+          "unit": "GJ/㎡·季",
+          "time_info": ""
+        },
+        "Q(t=end)": {
+          "meaning": "热源供暖季结束时的累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Q(t=start)": {
+          "meaning": "热源供暖季起始时的累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "A": {
+          "meaning": "热网总供热面积",
+          "unit": "㎡",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "结束时间和起始时间的时间段内小时数",
+          "unit": "小时H",
+          "time_info": ""
+        },
+        "(Q(t=end) - Q(t=start))": {
+          "meaning": "热源厂供暖季的总耗热量/产热量/累计热量",
+          "unit": "",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间；",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Q": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_source_inst_data表中src_id分别为1和2的src_sup_total_hheat；src_id=1的是商河恒泰热源厂，src_id=2是玉泉生物质电厂，若未明确指出哪个热源厂的指标计算，那么热源厂热单耗需要计算两个热源总和的热单耗，总热量需要分别计算src_id为1和2的累计热量的差值，再汇总得到热源厂总热量；因为不同热源src_id的数据data_time不相同，统计热量时不同src_id要分别获取起始时间和结束时间；",
+          "table": "ods_sc01_ntjt_zhgr_heat_source_inst_data",
+          "field": "src_sup_total_hheat",
+          "condition": "src_id IN (1, 2)",
+          "note": "需要分别计算不同src_id的值; 需要对结果进行汇总/求和; 不同src_id的起始/结束时间需分别获取"
+        },
+        "A": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表中所有stn_id的heat_area之和；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "",
+          "note": "需要对heat_area进行汇总/求和，并包含所有stn_id"
+        }
+      },
+      "keywords": [
+        "热单耗",
+        "供暖季",
+        "产热量",
+        "热源厂"
+      ],
+      "notes": []
+    },
+    "热源厂供热季热单耗": {
+      "formula": "q = (Q(t=end) - Q(t=start)) / A × (24 × 120) / ((t=end - t=start) + 1)",
+      "description": "供热季内，整个供热系统的单位建筑面积或单位供热量所消耗的热量，用于衡量供热系统的能源利用效率和节能水平。\n用供热季结束时的累计热量 减去 供热季开始时的累计热量 结果除以 整个热网总供热面积。",
+      "parameters": {
+        "q": {
+          "meaning": "水网单位面积热单耗",
+          "unit": "GJ/㎡·季",
+          "time_info": ""
+        },
+        "Q(t=end)": {
+          "meaning": "热源供热季结束时的累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Q(t=start)": {
+          "meaning": "热源供热季起始时的累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "A": {
+          "meaning": "热网总供热面积",
+          "unit": "㎡",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "结束时间和起始时间的时间段内小时数",
+          "unit": "小时H",
+          "time_info": ""
+        },
+        "(Q(t=end) - Q(t=start))": {
+          "meaning": "热源厂供热季的总耗热量/产热量/累计热量",
+          "unit": "",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间；",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Q": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_source_inst_data表中src_id分别为1和2的src_sup_total_hheat；src_id=1的是商河恒泰热源厂，src_id=2是玉泉生物质电厂，若未明确指出哪个热源厂的指标计算，那么热源厂热单耗需要计算两个热源总和的热单耗，总热量需要分别计算src_id为1和2的累计热量的差值，再汇总得到热源厂总热量；因为不同热源src_id的数据data_time不相同，统计热量时不同src_id要分别获取起始时间和结束时间；",
+          "table": "ods_sc01_ntjt_zhgr_heat_source_inst_data",
+          "field": "src_sup_total_hheat",
+          "condition": "src_id IN (1, 2)",
+          "note": "需要分别计算不同src_id的值; 需要对结果进行汇总/求和; 不同src_id的起始/结束时间需分别获取"
+        },
+        "A": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表中所有stn_id的heat_area之和；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "",
+          "note": "需要对heat_area进行汇总/求和，并包含所有stn_id"
+        }
+      },
+      "keywords": [
+        "热单耗",
+        "供热季",
+        "产热量",
+        "热源厂"
+      ],
+      "notes": []
+    },
+    "换热站采暖季热单耗": {
+      "formula": "qₐ = (Qₐ(t=end) - Qₐ(t=start)) / Aₐ * 24 * 120 / ((t=end - t=start) + 1)",
+      "description": "采暖季内，某一换热站的单位建筑面积或单位供热量所消耗的热量，用于衡量供热系统的能源利用效率和节能水平。",
+      "parameters": {
+        "qₐ": {
+          "meaning": "换热站a采暖季单位面积热单耗",
+          "unit": "GJ/m²·季",
+          "time_info": ""
+        },
+        "Qₐ(t=end)": {
+          "meaning": "换热站a采暖季结束时的一次侧累计热量",
+          "unit": "GJ",
+          "time_info": "2025年3月15日 0:00"
+        },
+        "Qₐ(t=start)": {
+          "meaning": "换热站a采暖季开始时的一次侧累计热量",
+          "unit": "GJ",
+          "time_info": "2024年11月15日 0:00"
+        },
+        "Aₐ": {
+          "meaning": "换热站a供热面积",
+          "unit": "m²",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间；",
+          "unit": "",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "起始时间和结束时间之间的小时数",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Qₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_id为a的stn_prim_total_hheat",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn_prim_total_hheat",
+          "condition": "",
+          "note": ""
+        },
+        "Aₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表stn_id为a的heat_area；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "热单耗",
+        "采暖季",
+        "供热量",
+        "换热站",
+        "热网"
+      ],
+      "notes": []
+    },
+    "换热站供暖季热单耗": {
+      "formula": "qₐ = [(Qₐ(t=end) - Qₐ(t=start)) / Aₐ] × (24 × 120) / ((t=end - t=start) + 1)",
+      "description": "供暖季的某一段时间，某一换热站的单位建筑面积或单位供热量所消耗的热量，用于衡量供热系统的能源利用效率和节能水平。",
+      "parameters": {
+        "qₐ": {
+          "meaning": "换热站a供暖季单位面积热单耗",
+          "unit": "GJ/m²·季",
+          "time_info": ""
+        },
+        "Qₐ(t=end)": {
+          "meaning": "换热站a供暖季结束时间的一次侧累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Qₐ(t=start)": {
+          "meaning": "换热站a供暖季起始时间的一次侧累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Aₐ": {
+          "meaning": "换热站a供热面积",
+          "unit": "m²",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "起始时间和结束时间之间的小时数",
+          "unit": "小时h",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间；",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Qₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_id为a的stn_prim_total_hheat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn_prim_total_hheat",
+          "condition": "",
+          "note": ""
+        },
+        "Aₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表stn_id为a的heat_area；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "热单耗",
+        "供暖季",
+        "供热量",
+        "换热站"
+      ],
+      "notes": []
+    },
+    "换热站供热季热单耗": {
+      "formula": "qₐ = [(Qₐ(t=end) - Qₐ(t=start)) / Aₐ] × (24 × 120) / ((t=end - t=start) + 1)",
+      "description": "供热季的某一段时间，某一换热站的单位建筑面积或单位供热量所消耗的热量，用于衡量供热系统的能源利用效率和节能水平。",
+      "parameters": {
+        "qₐ": {
+          "meaning": "换热站a供热季单位面积热单耗",
+          "unit": "GJ/m²·季",
+          "time_info": ""
+        },
+        "Qₐ(t=end)": {
+          "meaning": "换热站a供热季结束时间的一次侧累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Qₐ(t=start)": {
+          "meaning": "换热站a供热季起始时间的一次侧累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Aₐ": {
+          "meaning": "换热站a供热面积",
+          "unit": "m²",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "起始时间和结束时间之间的小时数",
+          "unit": "小时h",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间；",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Qₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_id为a的stn_prim_total_hheat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn_prim_total_hheat",
+          "condition": "",
+          "note": ""
+        },
+        "Aₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表stn_id为a的heat_area；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "热单耗",
+        "供热季",
+        "供热量",
+        "换热站"
+      ],
+      "notes": []
+    },
+    "指定时段(采暖季/供暖季/供热季)度日数": {
+      "formula": "HDD_season = ∑_{i=1}^{120} (T_base − T_avgᵢ)\nT_avgᵢ = (1 / 24) × ∑_{h=0}^{23} Tᵢ,ₕ",
+      "description": "指定时段度日数（HDD22）是一年中当某天室外日平均温度低于22℃时，将该日平均温度与22℃的差值度数乘以1天，所得出的乘积的累加值。其单位为℃·d。指定时段度日数为指定时段内每日的度日数之和。",
+      "parameters": {
+        "HDD_season": {
+          "meaning": "指定时段度日数",
+          "unit": "℃·季",
+          "time_info": ""
+        },
+        "T_base": {
+          "meaning": "度日数基准温度，取22℃",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "Tᵢ,ₕ": {
+          "meaning": "i日h小时的气温",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "T_avgᵢ": {
+          "meaning": "i日的平均气温",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "i": {
+          "meaning": "日期索引，取1到120，对应指定时段(采暖季/供暖季/供热季)共120日(2024年11月15日至2025年3月15日)",
+          "unit": "",
+          "time_info": "范围:1-120"
+        }
+      },
+      "db_mapping": {
+        "T": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_weather_info_log表temp",
+          "table": "ods_sc01_ntjt_zhgr_heat_weather_info_log",
+          "field": "temp",
+          "condition": "",
+          "note": ""
+        },
+        "i、h": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_weather_info_log表的data_time字段，格式为：YYYY-MM-DD HH:MM:SS，其中年月日为i日，小时为h，该表的temp为每小时一条数据；",
+          "table": "ods_sc01_ntjt_zhgr_heat_weather_info_log",
+          "field": "data_time",
+          "condition": "",
+          "note": "格式为：YYYY-MM-DD HH:MM:SS，其中年月日为i日，小时为h，该表的temp为每小时一条数据；"
+        }
+      },
+      "keywords": [
+        "度日数",
+        "度日数",
+        "采暖季",
+        "供暖季",
+        "供热季"
+      ],
+      "notes": []
+    },
+    "换热站指定时段(采暖季/供暖季/供热季)度日数单耗": {
+      "formula": "qₐ_hdd = qₐ / HDD_select\nqₐ = [(Qₐ(t=end) - Qₐ(t=start)) / Aₐ] × (24 × 120) / (t=end - t=start)\nHDD_select = ∑_{i=D_start}^{D_end} (T_base − T_avgᵢ)\nT_avgᵢ = (1 / 24) × ∑_{h=0}^{23} Tᵢ,ₕ",
+      "description": "如何拆解子问题：\n在子问题拆解时，\n1、先求出换热站指定时段(采暖季/供暖季/供热季)的热单耗\n 2、求换热站指定时段(采暖季/供暖季/供热季)的度日数\n度日数单耗公式解释：\n度日数热单耗是指在单位度日数（如 1℃・天）下，建筑或系统单位面积的平均耗热量，用于衡量建筑的供暖能耗效率。\n将供暖能耗与气候条件（度日数）关联，消除气候差异对能耗对比的影响，便于不同地区、不同建筑的节能性能评估。\n换热站a指定时段度日数单耗 = 换热站a指定时段内单位面积热单耗 / 指定时段度日数\n指定时段度日数 = 从起始日到结束日，每日度日数基准温度-每日的平均温度，所有日期的累加之和\n每日的平均温度 = 一天24小时的气温的平均值。\n",
+      "parameters": {
+        "qₐ_hdd": {
+          "meaning": "换热站a指定时段(采暖季/供暖季/供热季)度日数单耗",
+          "unit": "",
+          "time_info": "指定时段"
+        },
+        "qₐ": {
+          "meaning": "换热站a指定时段单位面积热单耗",
+          "unit": "GJ/m²·季",
+          "time_info": "指定时段"
+        },
+        "Qₐ(t=end)": {
+          "meaning": "换热站a指定时段结束时间的一次侧累计热量",
+          "unit": "GJ",
+          "time_info": "2025年3月15日 0:00"
+        },
+        "Qₐ(t=start)": {
+          "meaning": "换热站a指定时段起始时间的一次侧累计热量",
+          "unit": "GJ",
+          "time_info": "2024年11月15日 0:00"
+        },
+        "Aₐ": {
+          "meaning": "换热站a供热面积",
+          "unit": "m²",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "结束时间和起始时间的时间段内小时数",
+          "unit": "小时h",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间；",
+          "unit": "",
+          "time_info": ""
+        },
+        "HDD_select": {
+          "meaning": "指定时段度日数",
+          "unit": "℃·天",
+          "time_info": ""
+        },
+        "T_base": {
+          "meaning": "度日数基准温度，取22℃",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "Tᵢ,ₕ": {
+          "meaning": "i日h小时的气温",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "T_avgᵢ": {
+          "meaning": "i日的平均气温",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "D_start": {
+          "meaning": "计算指定时段度日数的起始日",
+          "unit": "",
+          "time_info": ""
+        },
+        "D_end": {
+          "meaning": "计算指定时段度日数的结束日",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Qₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_id为a的stn_prim_total_hheat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn_prim_total_hheat",
+          "condition": "",
+          "note": ""
+        },
+        "Aₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表stn_id为a的heat_area",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表data_time",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        },
+        "T": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_weather_info_log表temp",
+          "table": "ods_sc01_ntjt_zhgr_heat_weather_info_log",
+          "field": "temp",
+          "condition": "",
+          "note": ""
+        },
+        "i、h": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_weather_info_log表的data_time字段，格式为：YYYY-MM-DD HH:MM:SS，其中年月日为i日，小时为h，该表的temp为每小时一条数据；",
+          "table": "ods_sc01_ntjt_zhgr_heat_weather_info_log",
+          "field": "data_time",
+          "condition": "",
+          "note": "格式为：YYYY-MM-DD HH:MM:SS，其中年月日为i日，小时为h，该表的temp为每小时一条数据；"
+        }
+      },
+      "keywords": [
+        "度日数单耗",
+        "度日数单耗",
+        "度日数热单耗",
+        "度日数热单耗",
+        "度日数",
+        "采暖季",
+        "供暖季",
+        "供热季",
+        "换热站"
+      ],
+      "notes": []
+    },
+    "热源厂热泵指定时段(采暖季/供暖季/供热季)COP": {
+      "formula": "COPₐ = (Q_circₐ(t=end) - Q_circₐ(t=start)) / \n[ (Q_intₐ(t=end) - Q_intₐ(t=start)) + (Vₐ(t=end) - Vₐ(t=start)) × H × 0.00000418585 ]",
+      "description": "输出热量与输入驱动热量的比值，反映了热能驱动下的能效水平。",
+      "parameters": {
+        "COPₐ": {
+          "meaning": "热泵a在指定时段(采暖季/供暖季/供热季)的COP",
+          "unit": "%",
+          "time_info": ""
+        },
+        "t=start": {
+          "meaning": "指定时段的开始时间",
+          "unit": "",
+          "time_info": ""
+        },
+        "t=end": {
+          "meaning": "指定时段的结束时间",
+          "unit": "",
+          "time_info": ""
+        },
+        "Q_circₐ": {
+          "meaning": "热泵a的循环水累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Q_intₐ": {
+          "meaning": "热泵a的中介水累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        " Vₐ": {
+          "meaning": "热泵a的燃气累计耗气量",
+          "unit": "m³",
+          "time_info": ""
+        },
+        " H ": {
+          "meaning": "燃气单位体积热值",
+          "unit": "kcal/m³",
+          "time_info": ""
+        },
+        " 0.00000418585 ": {
+          "meaning": "热值单位换算系数",
+          "unit": "kcal → GJ",
+          "time_info": ""
+        },
+        " t ": {
+          "meaning": "时间",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Q_circₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data表中pump_id为a的circulate_water_total_hheat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data",
+          "field": "circulate_water_total_hheat",
+          "condition": "pump_id = 'a'",
+          "note": ""
+        },
+        "Q_intₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data表中pump_id为a的intermediary_water_total_hheat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data",
+          "field": "intermediary_water_total_hheat",
+          "condition": "pump_id = 'a'",
+          "note": ""
+        },
+        "Vₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data表中pump_id为a的heatpump_total_gas；",
+          "table": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data",
+          "field": "heatpump_total_gas",
+          "condition": "pump_id = 'a'",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data表data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        },
+        "H": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_calorific_info表中delivery_time最新的calorific_value；",
+          "table": "ods_sc01_ntjt_zhgr_heat_calorific_info",
+          "field": "calorific_value",
+          "condition": "",
+          "note": "calorific_value必须是delivery_time中最新的"
+        }
+      },
+      "keywords": [
+        "COP",
+        "热泵",
+        "热源厂",
+        "采暖季",
+        "供暖季",
+        "供热季",
+        "用气量",
+        "锅炉"
+      ],
+      "notes": []
+    },
+    "热源厂锅炉指定时段(采暖季/供暖季/供热季)热效率": {
+      "formula": "eₐ = (Qₐ(t=end) - Qₐ(t=start)) / ((Vₐ(t=end) - Vₐ(t=start)) × H × 0.00000418585)",
+      "description": "",
+      "parameters": {
+        "eₐ": {
+          "meaning": "锅炉a在指定时段的热效率，无量纲，乘以 100 表示百分比 %",
+          "unit": "%",
+          "time_info": ""
+        },
+        "Qₐ(t=end)": {
+          "meaning": "锅炉a在指定时段结束时间的累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Qₐ(t=start)": {
+          "meaning": "锅炉a在指定时段起始时间的累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Vₐ(t=end)": {
+          "meaning": "锅炉a在指定时段结束时间的燃气累计用量",
+          "unit": "m³",
+          "time_info": ""
+        },
+        "Vₐ(t=start)": {
+          "meaning": "锅炉a在指定时段起始时间的燃气累计用量",
+          "unit": "m³",
+          "time_info": ""
+        },
+        "H": {
+          "meaning": "燃气单位体积热值",
+          "unit": "kcal/m³",
+          "time_info": ""
+        },
+        "0.00000418585": {
+          "meaning": "热值单位换算系数(kcal → GJ)",
+          "unit": "",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Qₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data表blr_id为a的blr_total_heat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "blr_total_heat",
+          "condition": "blr_id = a",
+          "note": ""
+        },
+        "Vₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data表blr_id为a的blr_gas_total_hflow；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "blr_gas_total_hflow",
+          "condition": "blr_id = a",
+          "note": ""
+        },
+        "H": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_calorific_info表中delivery_time最新的calorific_value；",
+          "table": "ods_sc01_ntjt_zhgr_heat_calorific_info",
+          "field": "calorific_value",
+          "condition": "",
+          "note": "calorific_value必须是delivery_time中最新的"
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data表的data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "锅炉",
+        "热效率",
+        "热源厂",
+        "采暖季",
+        "供暖季",
+        "供热季"
+      ],
+      "notes": []
+    },
+    "热源厂锅炉指定时段负荷率": {
+      "formula": "LRₐ = (Qₐ(t=end) - Qₐ(t=start)) / (42 × 3600 × 0.001 × ((t=end - t=start) + 1)) × 100%",
+      "description": "锅炉负荷率是指锅炉在实际运行过程中输出的热功率（或供热量）与设计额定热功率（或额定供热量）的比值.它反映了锅炉实际运行负荷与设计能力的匹配程度，是评估锅炉运行效率、能耗水平及经济性的关键指标。\n负荷率= 实际供热量 / 额定功率 * 3600*小时数 * 100%",
+      "parameters": {
+        "LRₐ": {
+          "meaning": "锅炉id为a的锅炉负荷率(Load Ratio，百分比)",
+          "unit": "",
+          "time_info": ""
+        },
+        "Qₐ": {
+          "meaning": "锅炉id为a的锅炉累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "指定时段的小时数",
+          "unit": "H",
+          "time_info": ""
+        },
+        "42": {
+          "meaning": "锅炉额定热功率为42MW，则锅炉额定供热量为额定热功率 × 运行时间，如额定功率 2.8MW 的锅炉连续运行 1 小时的额定供热量为(2.8 * 3600 = 10080 MJ = 10.08 GJ)；",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Qₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data表blr_id为a的blr_total_heat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "blr_total_heat",
+          "condition": "blr_id = a",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data表的data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "采暖季",
+        "供暖季",
+        "供热季",
+        "负荷率",
+        "热源厂",
+        "锅炉"
+      ],
+      "notes": []
+    },
+    "换热站机组换热器对数平均温差": {
+      "formula": "ΔT_lm = [(T₁ - T₄) - (T₂ - T₃)] / ln[(T₁ - T₄) / (T₂ - T₃)]",
+      "description": "对数平均温差是某一时刻下换热器两侧的各参数计算所得指标，用于衡量换热效率。",
+      "parameters": {
+        "ΔT_lm": {
+          "meaning": "机组换热器对数平均温差LMTD",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "T₁": {
+          "meaning": "机组换热器的一次侧进口温度",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "T₂": {
+          "meaning": "机组换热器的一次侧出口温度",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "T₃": {
+          "meaning": "机组换热器的二次侧进口温度",
+          "unit": "℃",
+          "time_info": ""
+        },
+        "T₄": {
+          "meaning": "机组换热器的二次侧出口温度",
+          "unit": "℃",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "T₁": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_prim_sup_temp",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn_prim_sup_temp",
+          "condition": "",
+          "note": ""
+        },
+        "T₂": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_prim_ret_temp",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn_prim_ret_temp",
+          "condition": "",
+          "note": ""
+        },
+        "T₃": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stnX_seco_sup_temp，其中若是计算换热站a机组X的板换对数平均温差，则筛选stn_id为a的stnX_seco_sup_temp，机组号替换X进行字段筛选，机组1则该字段为stn1_seco_sup_temp，机组2则该字段为stn2_seco_sup_temp；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stnX_seco_sup_temp",
+          "condition": "",
+          "note": ""
+        },
+        "T₄": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stnX_seco_ret_temp，其中若是计算换热站a机组X的板换对数平均温差，则筛选stn_id为a的stnX_seco_ret_temp，机组号替换X进行字段筛选，机组1则该字段为stn1_seco_ret_temp，机组2则该字段为stn2_seco_ret_temp；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stnX_seco_ret_temp",
+          "condition": "",
+          "note": "其中若是计算换热站a机组X的板换对数平均温差，则筛选stn_id为a的stnX_seco_ret_temp，机组号替换X进行字段筛选，机组1则该字段为stn1_seco_ret_temp，机组2则该字段为stn2_seco_ret_temp；"
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "对数平均温差",
+        "换热站",
+        "换热器",
+        "进口温度",
+        "出口温度",
+        "机组"
+      ],
+      "notes": []
+    },
+    "换热站入住率": {
+      "formula": "ORₐ = A_actualₐ / A_meshₐ × 100%",
+      "description": "换热站入住率是指换热站所服务的供热区域内，实际入住并使用供热的用户供暖面积占设计规划的全部用户的入网面积的比例。\n它是衡量供热系统实际负荷与设计负荷匹配程度的重要指标，常用于评估供热效率、能耗水平及管网运行状态。\n入住率（建筑面积）= 实际供热的建筑面积 / 设计总建筑面积 ×100%",
+      "parameters": {
+        "ORₐ": {
+          "meaning": "换热站id为a的换热站入住率（Occupancy Rate，100%）",
+          "unit": "",
+          "time_info": ""
+        },
+        "A_actualₐ": {
+          "meaning": "换热站id为a的换热站实际供热建筑面积，已开通供热的房屋建筑面积之和",
+          "unit": "㎡",
+          "time_info": ""
+        },
+        "A_meshₐ": {
+          "meaning": "换热站id为a的换热站设计总建筑面积",
+          "unit": "㎡",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "A_actualₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表stn_id为a的heat_area；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "",
+          "note": ""
+        },
+        "A_meshₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表stn_id为a的mesh_area；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "mesh_area",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "换热站",
+        "入住率"
+      ],
+      "notes": []
+    },
+    "热网指定时段热量损失率": {
+      "formula": "NL = ((Q_source(t=end) - Q_source(t=start)) - (∑(Q_station_i(t=end) - Q_station_i(t=start)))) / (Q_source(t=end) - Q_source(t=start)) × 100%\n",
+      "description": "供热网损率是指在供热系统中，由于管网散热、管道泄漏等原因导致的热量损失占总供热量的比例。\n它是衡量供热管网运行效率和节能水平的重要指标，网损率越低，说明供热系统的热量利用效率越高，能源浪费越少。\n网损率 = (热网供热量-∑换热站用热量)/热网供热量*100%\n热网供热量：供热系统从热源输出的总热量，单位吉焦（GJ）。\n换热站供热量：有效供热量，最终输送到用户端并被实际利用的热量，即用户实际接收的热量。",
+      "parameters": {
+        "NL": {
+          "meaning": "热网指定时段热量损失率（Net Loss），单位100%；",
+          "unit": "%",
+          "time_info": "指定时段"
+        },
+        "Q_source": {
+          "meaning": "热源厂累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Q_station_i": {
+          "meaning": "换热站id为i的换热站累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "∑(Q_station_i(t=end) - Q_station_i(t=start))": {
+          "meaning": "所有换热站的指定时段累计热量差值之和，i为换热站id，需计算所有不同id的换热站的指定时段累计热量差值之和",
+          "unit": "GJ",
+          "time_info": "指定时段"
+        },
+        "t": {
+          "meaning": "时间",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Q_source": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_source_inst_data表中src_id为1的src_sup_total_hheat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_source_inst_data",
+          "field": "src_sup_total_hheat",
+          "condition": "src_id = 1",
+          "note": ""
+        },
+        "Q_station_i": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_id为i的stn_prim_total_hheat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn_prim_total_hheat",
+          "condition": "stn_id = i",
+          "note": "i为换热站id，需遍历所有不同的stn_id"
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表data_time",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": "用于确定指定时段的起始时间(t=start)和结束时间(t=end)"
+        }
+      },
+      "keywords": [
+        "采暖季",
+        "供暖季",
+        "供热季",
+        "热量",
+        "损失率",
+        "热网"
+      ],
+      "notes": []
+    },
+    "换热站指定时段电单耗": {
+      "formula": "电单耗_换热站i = (E_换热站i(t=end) - E_换热站i(t=start)) × 24 × 120 / A_换热站i / ((t=end - t=start) + 1)",
+      "description": "单位面积电单耗是指在供热系统运行过程中，每平方米供热面积在一定时间内消耗的电量，是衡量供热系统电能利用效率与节能水平的重要指标。电单耗越低，说明供热系统的电节能性越好。",
+      "parameters": {
+        "电单耗_换热站i": {
+          "meaning": "换热站id为i的换热站指定时段电单耗",
+          "unit": "kWh/㎡·季",
+          "time_info": ""
+        },
+        "E_换热站i": {
+          "meaning": "换热站id为i的累计耗电量",
+          "unit": "kWh",
+          "time_info": ""
+        },
+        "A_换热站i": {
+          "meaning": "换热站id为i的供热面积",
+          "unit": "㎡",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间",
+          "unit": "",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "指定时段的小时数",
+          "unit": "H",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "E_换热站i": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_id为i的stn_total_elec；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn_total_elec",
+          "condition": "stn_id = i",
+          "note": ""
+        },
+        "A_换热站i": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表stn_id为i的heat_area；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "stn_id = i",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "指定时段",
+        "采暖季",
+        "供暖季",
+        "供热季",
+        "换热站",
+        "电单耗"
+      ],
+      "notes": []
+    },
+    "换热站指定时段水单耗": {
+      "formula": "A_换热站i的水单耗= (∑_{jz=1}^{n}((W_换热站i(t=end) - W_换热站i(t=start)))) × 1000 × 120 × 24 / A_换热站i / ((t=end - t=start) + 1)",
+      "description": "单位面积水单耗是指在供热系统中，每平方米供热面积在一定时间内消耗的水量，用于反映循环水系统的补水率、泄漏量及运行管理水平，水单耗越低，说明系统的水资源浪费越少，管网密封性和运行效率越高。\n注意：上面公式中， × 120：表示一个采暖季有120天。× 24小时：表示每天有24个小时。这两个信息和公式中 “/ ((t=end - t=start) + 1)”强相关。如果除以的时间是以天为单位，例如：TIMESTAMPDIFF(DAY, s.start_time, e.end_time)中， 按照天计算。则公式中只需要× 120就可以。\n如果除以的时间是以小时为单位，例如：(TIMESTAMPDIFF(HOUR, s.start_time, e.end_time)+1)中， 是按照小时计算。则公式中需要  × 120 × 24。\n公式中的“× 120 × 24/((t=end - t=start) + 1)”,是将一段时间换成“季”的单位换算。",
+      "parameters": {
+        "水单耗_换热站i": {
+          "meaning": "换热站id为i的换热站指定时段水单耗",
+          "unit": "kg/㎡·季",
+          "time_info": ""
+        },
+        "W_换热站i": {
+          "meaning": "换热站id为i的机组累计耗水量",
+          "unit": "m³",
+          "time_info": ""
+        },
+        "A_换热站i": {
+          "meaning": "换热站id为i的供热面积",
+          "unit": "㎡",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间",
+          "unit": "",
+          "time_info": ""
+        },
+        "(t=end - t=start)": {
+          "meaning": "指定时段的小时数",
+          "unit": "H",
+          "time_info": ""
+        },
+        "jz": {
+          "meaning": "机组数量，若机组数量大于1，则换热站i水单耗为多机组的水单耗差值之和；",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "W_换热站i": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表stn_id为i的stn{jz}_seco_repl_total_flow，jz为机组id，例如1、2、3，换热站机组数量存储在ods_sc01_ntjt_zhgr_heat_station_info的plan_num；其中换热站a机组X的累计耗水量，筛选stn_id为a的stnX_seco_repl_total_flow，机组号替换X进行字段筛选，机组1则该字段为stn1_seco_repl_total_flow，机组2则该字段为stn2_seco_repl_total_flow；若是plan_num只有1，那么只需要获取计算stn1_seco_repl_total_flow，若是plan_num不是1，则需要计算stn1_seco_repl_total_flow到stnX_seco_repl_total_flow的指定时间段内的耗水量，再汇总计算得到换热站的水单耗；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "stn{jz}_seco_repl_total_flow",
+          "condition": "stn_id = i",
+          "note": "jz为机组id，例如1、2、3，换热站机组数量存储在ods_sc01_ntjt_zhgr_heat_station_info的plan_num；其中换热站a机组X的累计耗水量，筛选stn_id为a的stnX_seco_repl_total_flow，机组号替换X进行字段筛选，机组1则该字段为stn1_seco_repl_total_flow，机组2则该字段为stn2_seco_repl_total_flow；若是plan_num只有1，那么只需要获取计算stn1_seco_repl_total_flow，若是plan_num不是1，则需要计算stn1_seco_repl_total_flow到stnX_seco_repl_total_flow的指定时间段内的耗水量，再汇总计算得到换热站的水单耗；"
+        },
+        "A_换热站i": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_info表stn_id为i的heat_area；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_info",
+          "field": "heat_area",
+          "condition": "stn_id = i",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_station_inst_data表data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "指定时段",
+        "水单耗",
+        "换热站",
+        "采暖季",
+        "供暖季",
+        "供热季"
+      ],
+      "notes": []
+    },
+    "热源厂锅炉指定时段单耗": {
+      "formula": "锅炉a指定时段单耗 =  (Vₐ(t=end) - Vₐ(t=start)) / (Qₐ(t=end) - Qₐ(t=start))",
+      "description": "燃气热水锅炉单耗是单位体积天然气燃烧后锅炉实际输出的有效热量，由天然气热值和锅炉热效率共同决定，是衡量锅炉能量利用效率和运行经济性的直接指标。",
+      "parameters": {
+        "锅炉a指定时段单耗": {
+          "meaning": "锅炉a在指定时段的单耗",
+          "unit": "GJ/m³",
+          "time_info": ""
+        },
+        "Qₐ(t=end)": {
+          "meaning": "锅炉a在指定时段结束时间的累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Qₐ(t=start)": {
+          "meaning": "锅炉a在指定时段起始时间的累计热量",
+          "unit": "GJ",
+          "time_info": ""
+        },
+        "Vₐ(t=end)": {
+          "meaning": "锅炉a在指定时段结束时间的燃气累计用量",
+          "unit": "m³",
+          "time_info": ""
+        },
+        "Vₐ(t=start)": {
+          "meaning": "锅炉a在指定时段起始时间的燃气累计用量",
+          "unit": "m³",
+          "time_info": ""
+        },
+        "t": {
+          "meaning": "时间",
+          "unit": "",
+          "time_info": ""
+        }
+      },
+      "db_mapping": {
+        "Qₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data表blr_id为a的blr_total_heat；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "blr_total_heat",
+          "condition": "blr_id = a",
+          "note": ""
+        },
+        "Vₐ": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data表blr_id为a的blr_gas_total_hflow；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "blr_gas_total_hflow",
+          "condition": "blr_id = a",
+          "note": ""
+        },
+        "t": {
+          "raw_description": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data表的data_time；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "data_time",
+          "condition": "",
+          "note": ""
+        }
+      },
+      "keywords": [
+        "单耗",
+        "指定时段",
+        "锅炉",
+        "采暖季",
+        "供暖季",
+        "供热季",
+        "热源厂"
+      ],
+      "notes": []
+    },
+    "商河恒泰热源厂各月总燃气用量": {
+      "formula": "total_gas_usage(month) = Σ_i [ G_end(i, month) - G_start(i, month) ]",
+      "description": "计算商河恒泰热源厂在指定时段内各月份的总燃气用量。计算分为三个阶段：\n(1) 对厂区内每台燃气设备（包括锅炉与热泵），确定该设备在每个月的首尾观测时刻；\n(2) 分别取出对应时刻的累计燃气量读数，计算两者的差值作为该设备该月的用气量；\n(3) 对同月内所有设备的差值结果求和，得到厂区级的月度总燃气用量。结果为各月分别统计的总燃气用量，按月独立输出，不进行跨月汇总。\n异常与缺失处理规则：采用多层次的空值保护机制。首先，对月初和月末的累计值分别进行空值检查，若任一端为空则视为0；其次，对计算得到的差值本身也进行空值检查，若差值运算结果为空则同样视为0。这种层层保护的处理方式确保即使源数据缺失或中间计算异常，每台设备在每个月都能产生一个确定的数值（可能为0）参与最终汇总，避免空值传播导致整体结果失效。",
+      "parameters": {
+        "total_gas_usage(month)": {
+          "meaning": "商河恒泰热源厂该月的总燃气用量（按月先设备求差再汇总）",
+          "unit": "Nm³",
+          "time_info": "按月统计（可能多月：如采暖季或各月时间范围为 11月15日至次年3月15日），各月独立，不跨月求和"
+        },
+        "G_end(i, month)": {
+          "meaning": "设备 i 在该月最后一条记录的累计燃气量（空值时视为0）",
+          "unit": "Nm³",
+          "time_info": "当月末时刻"
+        },
+        "G_start(i, month)": {
+          "meaning": "设备 i 在该月最早一条记录的累计燃气量（空值时视为0）",
+          "unit": "Nm³",
+          "time_info": "当月初时刻"
+        },
+        "i": {
+          "meaning": "设备编号，包括锅炉和热泵",
+          "unit": "无量纲",
+          "time_info": ""
+        }
+      },
+      
+      "db_mapping": {
+        "G(锅炉)": {
+          "raw_description": "来自 ods_sc01_ntjt_zhgr_heat_boiler_inst_data 表中各锅炉（blr_id）的累计燃气量字段 blr_gas_total_hflow；",
+          "table": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+          "field": "blr_gas_total_hflow",
+          "condition": "blr_id 为有效锅炉编号（1、2、3、4),时间也需按月筛选月末与月初",
+          "note": "按月先计算每台锅炉的月末与月初累计量差值。计算时需要对月初值、月末值以及差值结果分别进行空值处理，确保任一环节出现空值时都能得到确定的数值0，最后对当月所有锅炉求和。"
+        },
+        "G(热泵)": {
+          "raw_description": "来自 ods_sc01_ntjt_zhgr_heat_heatpump_inst_data 表中各热泵（pump_id）的累计燃气量字段 heatpump_total_gas；",
+          "table": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data",
+          "field": "heatpump_total_gas",
+          "condition": "pump_id 为有效热泵编号（1、2),时间也需按月筛选月末与月初",
+          "note": "按月先计算每台热泵的月末与月初累计量差值。计算时需要对月初值、月末值以及差值结果分别进行空值处理，确保任一环节出现空值时都能得到确定的数值0，最后对当月所有热泵求和。"
+
+        }
+      },
+      "keywords": [
+        "燃气用量",
+        "总燃气用量",
+        "商河恒泰热源厂",
+        "商河恒泰",
+        "供热季"
+      ],
+      "notes": [
+        "计算顺序：先按设备在同月内求差（月末累计 - 月初累计），再在该月内对所有设备（锅炉+热泵）求和得到当月全厂用气；各月结果独立，不进行跨月汇总。",
+        "时间范围可灵活设置，如采暖季或任意月份区间，但结果以月为单位分别输出。",
+        "缺失与异常处理：实施多层次空值保护策略。第一层保护作用于原始数据读取阶段，对月初和月末的累计值分别进行空值检查，若为空则替换为0；第二层保护作用于差值计算结果，对减法运算的结果进行空值检查，若结果为空则同样替换为0。这种机制确保无论数据质量如何，每台设备在每个月都能贡献一个确定的数值参与汇总，防止空值在计算链中传播造成最终结果失效。"
+      ]
+    }
+  }
+}

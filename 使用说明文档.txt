@@ -1,0 +1,7 @@
+1、按照requirement.txt配置python环境
+2、算法框架使用了本地数据库用于语法检查，数据库创建的代码详见schema_create.txt，运行该代码时，可能需要更改PC端的数据库端口号、用户名和密码
+3、运行算法代码，仅需直接运行text_to_sql_project\test\3_生成复赛打榜评测25题.py即可
+生成的文件:
+（1）项目结果: text_to_sql_project\backups\复赛打榜评测_生成的SQL结果.xlsx
+（2）提交文件: text_to_sql_project\results\提交_复赛打榜评测SQL结果.xlsx
+（3）日志文件位于：text_to_sql_project\results\logs\复赛打榜25题log_xxxx.txt

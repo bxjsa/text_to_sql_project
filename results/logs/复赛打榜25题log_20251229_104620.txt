@@ -1,0 +1,424 @@
+日志记录启动，文件位于：results\logs\复赛打榜25题log_20251229_104620.txt
+
+================================================================================
+Text-to-SQL 复赛打榜评测集生成 (25题)
+================================================================================
+加载复赛打榜评测文件: 复赛打榜评测25题.xlsx
+数据形状: (25, 2)
+列名: ['问题', '模型生成的SQL']
+
+前5个问题预览:
+1. 2024-2025供暖季商河所有换热站各月电单耗最高的5个换热站分别是哪5个？
+2. 2024-2025供暖季商河热网损失率是多少？
+3. 商河恒泰24-25供热季燃气用量
+4. 2024-2025供暖季豪门又一城站各月水单耗最高的是那一个月？
+5. 2024-2025供暖季商河恒泰热源厂各月总燃气用量是多少？
+
+================================================================================
+是否开始生成SQL? (y/n，默认y): 
+初始化Text-to-SQL引擎...
+🔧 构建示例向量索引...
+✅ 索引构建完成,共 100 个示例
+
+================================================================================
+🚀 初始化 SQL 规则检查器（反馈增强版）
+================================================================================
+📄 Schema文件: data\heating_system_mschema.txt
+
+================================================================================
+🔧 解析Schema结构
+================================================================================
+
+📊 表: ods_sc01_ntjt_zhgr_heat_station_inst_data -> 换热站实时数据表。主键为stn_id。
+   ├─ stn_id (INTEGER) - 站点ID
+   ├─ data_time (DATETIME) - 数据时间
+   ├─ data_id (BIGINT) - 数据ID自增
+   ├─ data_storage_time (DATETIME) - 加载数据的时间
+   ├─ stn_prim_sup_temp (DECIMAL) - 一次网供水温度
+   ├─ stn_prim_ret_temp (DECIMAL) - 一次网回水温度
+   ├─ stn_prim_sup_bdirt_press (DECIMAL) - 一次网供水污前压力
+   ├─ stn_prim_sup_adirt_press (DECIMAL) - 一次网供水污后压力
+   ├─ stn_prim_ret_press (DECIMAL) - 一次网回水压力
+   ├─ stn_prim_sup_htemp (DECIMAL) - 一次网热表供水温度
+   ├─ stn_prim_ret_htemp (DECIMAL) - 一次网热表回水温度
+   ├─ stn_prim_inst_hflow (DECIMAL) - 一次网热表瞬时流量
+   ├─ stn_prim_total_hflow (DECIMAL) - 一次网热表累计流量
+   ├─ stn_prim_inst_hheat (DECIMAL) - 一次网热表瞬时热量
+   ├─ stn_prim_total_hheat (DECIMAL) - 一次网热表累计热量
+   ├─ stn_eney_sup_temp (DECIMAL) - 新能源供水温度
+   ├─ stn_eney_ret_temp (DECIMAL) - 新能源回水温度
+   ├─ stn_eney_sup_bdirt_press (DECIMAL) - 新能源供水污前压力
+   ├─ stn_eney_sup_adirt_press (DECIMAL) - 新能源供水污后压力
+   ├─ stn_eney_ret_press (DECIMAL) - 新能源回水压力
+   ├─ stn_eney_sup_htemp (DECIMAL) - 新能源热表供水温度
+   ├─ stn_eney_ret_htemp (DECIMAL) - 新能源热表回水温度
+   ├─ stn_eney_inst_hflow (DECIMAL) - 新能源热表瞬时流量
+   ├─ stn_eney_total_hflow (DECIMAL) - 新能源热表累计流量
+   ├─ stn_eney_inst_hheat (DECIMAL) - 新能源热表瞬时热量
+   ├─ stn_eney_total_hheat (DECIMAL) - 新能源热表累计热量
+   ├─ stn_inst_elec (DECIMAL) - 瞬时用电功率
+   ├─ stn_total_elec (DECIMAL) - 累计用电电度
+   ├─ plant1_id (BIGINT) - 机组1ID
+   ├─ stn1_set_elec_valve_open (DECIMAL) - 电动调节阀给定开度1
+   ├─ stn1_inst_elec_valve_open (DECIMAL) - 电动调节阀实际开度1
+   ├─ stn1_seco_sup_temp (DECIMAL) - 二次网供水温度1
+   ├─ stn1_seco_ret_temp (DECIMAL) - 二次网回水温度1
+   ├─ stn1_seco_sup_press (DECIMAL) - 二次网供水压力1
+   ├─ stn1_seco_ret_bdirt_press (DECIMAL) - 二次网回水污前压力1
+   ├─ stn1_seco_ret_adirt_press (DECIMAL) - 二次网回水污后压力1
+   ├─ stn1_seco_sup_htemp (DECIMAL) - 二次网热表供水温度1
+   ├─ stn1_seco_ret_htemp (DECIMAL) - 二次网热表回水温度1
+   ├─ stn1_seco_inst_hflow (DECIMAL) - 二次网热表瞬时流量1
+   ├─ stn1_seco_total_hflow (DECIMAL) - 二次网热表累计流量1
+   ├─ stn1_seco_inst_hheat (DECIMAL) - 二次网热表瞬时热量1
+   ├─ stn1_seco_total_hheat (DECIMAL) - 二次网热表累计热量1
+   ├─ stn1_seco_repl_inst_flow (DECIMAL) - 补水瞬时流量1
+   ├─ stn1_seco_repl_total_flow (DECIMAL) - 补水累计流量1
+   ├─ plant2_id (BIGINT) - 机组2ID
+   ├─ stn2_set_elec_valve_open (DECIMAL) - 电动调节阀给定开度2
+   ├─ stn2_inst_elec_valve_open (DECIMAL) - 电动调节阀实际开度2
+   ├─ stn2_seco_sup_temp (DECIMAL) - 二次网供水温度2
+   ├─ stn2_seco_ret_temp (DECIMAL) - 二次网回水温度2
+   ├─ stn2_seco_sup_press (DECIMAL) - 二次网供水压力2
+   ├─ stn2_seco_ret_bdirt_press (DECIMAL) - 二次网回水污前压力2
+   ├─ stn2_seco_ret_adirt_press (DECIMAL) - 二次网回水污后压力2
+   ├─ stn2_seco_sup_htemp (DECIMAL) - 二次网热表供水温度2
+   ├─ stn2_seco_ret_htemp (DECIMAL) - 二次网热表回水温度2
+   ├─ stn2_seco_inst_hflow (DECIMAL) - 二次网热表瞬时流量2
+   ├─ stn2_seco_total_hflow (DECIMAL) - 二次网热表累计流量2
+   ├─ stn2_seco_inst_hheat (DECIMAL) - 二次网热表瞬时热量2
+   ├─ stn2_seco_total_hheat (DECIMAL) - 二次网热表累计热量2
+   ├─ stn2_seco_repl_inst_flow (DECIMAL) - 补水瞬时流量2
+   ├─ stn2_seco_repl_total_flow (DECIMAL) - 补水累计流量2
+   ├─ plant3_id (BIGINT) - 机组3ID
+   ├─ stn3_set_elec_valve_open (DECIMAL) - 电动调节阀给定开度3
+   ├─ stn3_inst_elec_valve_open (DECIMAL) - 电动调节阀实际开度3
+   ├─ stn3_seco_sup_temp (DECIMAL) - 二次网供水温度3
+   ├─ stn3_seco_ret_temp (DECIMAL) - 二次网回水温度3
+   ├─ stn3_seco_sup_press (DECIMAL) - 二次网供水压力3
+   ├─ stn3_seco_ret_bdirt_press (DECIMAL) - 二次网回水污前压力3
+   ├─ stn3_seco_ret_adirt_press (DECIMAL) - 二次网回水污后压力3
+   ├─ stn3_seco_sup_htemp (DECIMAL) - 二次网热表供水温度3
+   ├─ stn3_seco_ret_htemp (DECIMAL) - 二次网热表回水温度3
+   ├─ stn3_seco_inst_hflow (DECIMAL) - 二次网热表瞬时流量3
+   ├─ stn3_seco_total_hflow (DECIMAL) - 二次网热表累计流量3
+   ├─ stn3_seco_inst_hheat (DECIMAL) - 二次网热表瞬时热量3
+   ├─ stn3_seco_total_hheat (DECIMAL) - 二次网热表累计热量3
+   ├─ stn3_seco_repl_inst_flow (DECIMAL) - 补水瞬时流量3
+   ├─ stn3_seco_repl_total_flow (DECIMAL) - 补水累计流量3
+
+📊 表: ods_sc01_ntjt_zhgr_heat_station_info -> 换热站业务信息表。主键为id。ods_sc01_ntjt_zhgr_heat_station_info.stn_id=ods_sc01_ntjt_zhgr_heat_station_inst_data.stn_id
+   ├─ id (INTEGER) - 自增整数类型用于唯一标识记录
+   ├─ stn_name (VARCHAR) - 换热站名称
+   ├─ stn_state (CHAR) - 换热站状态（0：在运，1：停运，2：维修）
+   ├─ plan_num (INTEGER) - 机组数量
+   ├─ heat_method (CHAR) - 采暖方式 (0: 地暖 / 1: 挂暖 / 2: 中央空调 / 3: 挂暖 + 中央空调)
+   ├─ build_type (CHAR) - 站点性质 (0: 居民 / 1: 公建 / 2: 医院 / 3: 学校 / 4: 工业)
+   ├─ site_type (CHAR) - 站点类型（0：监控站，1：人工站，2：自管站）
+   ├─ heat_area (NUMERIC) - 供热面积（默认）
+   ├─ state_time (TIMESTAMP) - 状态变更时间
+   ├─ build_time (TIMESTAMP) - 建设时间
+   ├─ mesh_area (NUMERIC) - 入网面积 (建筑面积)
+   ├─ trans_area (NUMERIC) - 传热面积
+   ├─ actual_area (NUMERIC) - 实际供暖面积
+   ├─ belong_unit (VARCHAR) - 所属单位
+   ├─ longitude (NUMERIC) - 经度
+   ├─ latitude (NUMERIC) - 纬度
+   ├─ charge_person (VARCHAR) - 负责人
+   ├─ contact_info (VARCHAR) - 联系人
+   ├─ site_addr (VARCHAR) - 热站地址
+   ├─ create_time (TIMESTAMP) - 建造时间
+   ├─ is_delete (CHAR) - 0：未删除 1：已删除
+   ├─ distance (NUMERIC) - 距离（拓扑距离） 真实管网距离
+   ├─ stn_id (INTEGER) - 实时表中对应的换热站id
+   ├─ heatstation_code (VARCHAR) - ERP中换热站唯一编码
+   ├─ source_num (INTEGER) - 热源数量
+   ├─ valve_num (INTEGER) - 阀门数量
+   ├─ source_type (CHAR) - 热源形式：(0: 地热井 / 风冷螺杆机 / 1: 空气源热泵 / 2: 燃气锅炉 / 3: 燃空气源热泵 / 4: 水网 / 5: 基汽 / 6: 综合能源)
+   ├─ energy_save_type (CHAR) - 节能类型：(0: 非节能 / 1: 一步节能 / 2: 二步节能 / 3: 三步节能 / 4: 四步节能)
+   ├─ serial_num (INTEGER) - 站点排序
+
+📊 表: ods_sc01_ntjt_zhgr_heat_source_inst_data -> 热源实时数据表。
+   ├─ src_id (INTEGER) - 热源ID
+   ├─ data_time (DATETIME) - 采集时间
+   ├─ data_id (BIGINT) - 数据ID自增
+   ├─ data_storage_time (DATETIME) - 落库时间
+   ├─ src_repl_inst_flow (DECIMAL) - 瞬时用水量
+   ├─ src_repl_total_flow (DECIMAL) - 累计用水量
+   ├─ src_inst_elec (DECIMAL) - 瞬时电功率
+   ├─ src_total_elec (DECIMAL) - 累计用电量
+   ├─ src_run_load (DECIMAL) - 运行负荷
+   ├─ src_sup_temp (DECIMAL) - 供水温度
+   ├─ src_sup_press (DECIMAL) - 供水压力
+   ├─ src_sup_sup_htemp (DECIMAL) - 供水热表供温
+   ├─ src_sup_ret_htemp (DECIMAL) - 供水热表回温
+   ├─ src_sup_inst_hflow (DECIMAL) - 热表供水瞬时流量
+   ├─ src_sup_total_hflow (DECIMAL) - 热表供水累计流量
+   ├─ src_sup_inst_hheat (DECIMAL) - 热表供水瞬时热量
+   ├─ src_sup_total_hheat (DECIMAL) - 热表供水累计热量
+   ├─ src_ret_temp (DECIMAL) - 回水温度
+   ├─ src_ret_press (DECIMAL) - 回水压力
+   ├─ src_ret_sup_htemp (DECIMAL) - 回水热表供温
+   ├─ src_ret_ret_htemp (DECIMAL) - 回水热表回温
+   ├─ src_ret_inst_hflow (DECIMAL) - 回水瞬时流量
+   ├─ src_ret_total_hflow (DECIMAL) - 回水累计流量
+   ├─ src_ret_inst_hheat (DECIMAL) - 回水瞬时热量
+   ├─ src_ret_total_hheat (DECIMAL) - 回水累计热量
+   ├─ src_ret_set_elec_valve_open (DECIMAL) - 回水阀门设定开度
+   ├─ src_ret_inst_elec_valve_open (DECIMAL) - 回水阀门实际开度
+
+📊 表: ods_sc01_ntjt_zhgr_heat_weather_info_log -> 商河县历史天气数据表。包含商河地区每日每小时的天气情况。
+   ├─ data_time (DATETIME) - 时间
+   ├─ data_id (BIGINT) - 数据ID自增
+   ├─ temp (DECIMAL) - 气温
+   ├─ solar (DECIMAL) - 太阳辐射
+   ├─ longitude (DECIMAL) - 经度
+   ├─ latitude (DECIMAL) - 纬度 37.330000.00
+   ├─ altitude (DECIMAL) - 海拔
+   ├─ rh (DECIMAL) - 相对湿度
+   ├─ wind_dir (DECIMAL) - 风向
+   ├─ wind_speed (DECIMAL) - 风速
+   ├─ air_pressure (DECIMAL) - 气压
+   ├─ rain (DECIMAL) - 降水量(mm)
+   ├─ cloudiness_all (DECIMAL) - 总云量(%)
+   ├─ cloudiness_low (DECIMAL) - 低云量(%)
+   ├─ weather_code (INTEGER) - "气天气现象(代码)0:晴
+   ├─ weather_desc (VARCHAR) - "天气现象(描述)0:晴
+   ├─ rh_max (DECIMAL) - 最大相对湿度(%)
+   ├─ rh_min (DECIMAL) - 最小相对湿度(%)
+
+📊 表: ods_sc01_ntjt_zhgr_heat_source_info -> 供热热源厂信息表。信息为商河热源厂的相关信息。ods_sc01_ntjt_zhgr_heat_source_info.src_id=ods_sc01_ntjt_zhgr_heat_source_inst_data.src_id
+   ├─ id (INTEGER) - 数据主键ID自增
+   ├─ src_name (VARCHAR) - 热源名称
+   ├─ src_id (INTEGER) - 实时数据表中的热源ID
+   ├─ src_type (CHAR) - 热源类型(0：燃煤锅炉1：燃气锅炉2：电锅炉3：热电联产4：能源站)
+   ├─ src_state (CHAR) - 热源状态(0：在运，1：停运，2：维修)
+   ├─ state_time (TIMESTAMP) - 状态变更时间
+   ├─ build_time (TIMESTAMP) - 建设时间
+   ├─ heat_area (NUMERIC) - 供热面积
+   ├─ mesh_area (NUMERIC) - 入网面积
+   ├─ design_heat (NUMERIC) - 设计供热能力
+   ├─ actual_heat (NUMERIC) - 实际供热能力
+   ├─ heat_price (NUMERIC) - 热单价
+   ├─ belong_unit (VARCHAR) - 所属单位
+   ├─ charge_person (VARCHAR) - 负责人
+   ├─ contact_info (VARCHAR) - 联系人电话
+   ├─ site_addr (VARCHAR) - 地址
+   ├─ create_by (VARCHAR) - 信息创建人
+   ├─ create_time (TIMESTAMP) - 信息创建时间
+   ├─ update_by (VARCHAR) - 信息更新人
+   ├─ update_time (TIMESTAMP) - 信息更新时间
+   ├─ is_delete (CHAR) - 是否删除(0：未删除, 1：已删除)
+   ├─ remark (VARCHAR) - 备注
+   ├─ longitude (NUMERIC) - 经度
+   ├─ latitude (NUMERIC) - 纬度
+   ├─ load_coefficient (NUMERIC) - 负荷预测修正系数
+
+📊 表: ods_sc01_ntjt_zhgr_heat_heatpump_inst_data -> 热源厂热泵实时数据表。
+   ├─ data_time (DATETIME) - 采集时间
+   ├─ pump_id (VARCHAR) - ID
+   ├─ data_id (BIGINT) - 数据ID自增
+   ├─ data_storage_time (DATETIME) - Time when the data is loaded
+   ├─ generator_smoke_out_temp ((DECIMAL, 4)) - 发生器_烟气出口温度
+   ├─ generator_gas_in_temp ((DECIMAL, 4)) - 发生器_燃气入口压力
+   ├─ generator_gas_in_elec_valve_open ((DECIMAL, 4)) - 发生器_燃气入口阀门开度
+   ├─ solution_in_temp ((DECIMAL, 4)) - 溶液板换_入口温度
+   ├─ solution_out_temp ((DECIMAL, 4)) - 溶液板换_出口温度
+   ├─ dilute_solution_set_frequency ((DECIMAL, 4)) - 稀溶液泵_频率给定
+   ├─ concentrated_solution_set_frequency ((DECIMAL, 4)) - 浓溶液泵_频率给定
+   ├─ condenser_temp ((DECIMAL, 4)) - 冷凝器_冷凝温度
+   ├─ evaporator_temp ((DECIMAL, 4)) - 蒸发器_蒸发温度
+   ├─ refrigerant_pump_set_frequency ((DECIMAL, 4)) - 冷剂泵_频率给定
+   ├─ heat_network_in_temp ((DECIMAL, 4)) - 热网水入口温度
+   ├─ heat_network_in_press ((DECIMAL, 4)) - 热网水入口压力
+   ├─ heat_network_out_temp ((DECIMAL, 4)) - 热网水出口温度
+   ├─ heat_network_out_press ((DECIMAL, 4)) - 热网水出口压力
+   ├─ spray_water_out_temp ((DECIMAL, 4)) - 喷淋水出口温度
+   ├─ spray_water_out_press ((DECIMAL, 4)) - 喷淋水出口压力
+   ├─ circulate_water_sup_htemp ((DECIMAL, 4)) - 循环水热表_供水温度
+   ├─ circulate_water_ret_htemp ((DECIMAL, 4)) - 循环水热表_回水温度
+   ├─ circulate_water_inst_hflow ((DECIMAL, 4)) - 循环水热表_瞬时流量
+   ├─ circulate_water_inst_hheat ((DECIMAL, 4)) - 循环水热表_瞬时热量
+   ├─ circulate_water_total_hflow ((DECIMAL, 4)) - 循环水热表_累计流量
+   ├─ circulate_water_total_hheat ((DECIMAL, 4)) - 循环水热表_累计热量
+   ├─ intermediary_water_sup_htemp ((DECIMAL, 4)) - 中介水热表_供水温度
+   ├─ intermediary_water_ret_htemp ((DECIMAL, 4)) - 中介水热表_回水温度
+   ├─ intermediary_water_inst_hflow ((DECIMAL, 4)) - 中介水热表_瞬时流量
+   ├─ intermediary_water_inst_hheat ((DECIMAL, 4)) - 中介水热表_瞬时热量
+   ├─ intermediary_water_total_hflow ((DECIMAL, 4)) - 中介水热表_累计流量
+   ├─ intermediary_water_total_hheat ((DECIMAL, 4)) - 中介水热表_累计热量
+   ├─ heatpump_total_gas ((DECIMAL, 2)) - 热泵耗气量
+   ├─ oil_choke_pressure ((DECIMAL, 2)) - 阻油器压力
+   ├─ heatpump_inst_gas ((DECIMAL, 2)) - 热泵耗气量瞬时流量
+
+📊 表: ods_sc01_ntjt_zhgr_heat_boiler_inst_data -> 热源厂锅炉实时数据表。
+   ├─ data_time (DATETIME) - 采集时间
+   ├─ blr_id (VARCHAR) - 锅炉ID
+   ├─ data_id (BIGINT) - 数据ID自增
+   ├─ data_storage_time (DATETIME) - Time when the data is loaded
+   ├─ blr_sup_temp ((DECIMAL, 4)) - 锅炉_供水温度
+   ├─ blr_sup_press ((DECIMAL, 4)) - 锅炉_供水压力
+   ├─ blr_ret_temp ((DECIMAL, 4)) - 锅炉_回水温度
+   ├─ blr_ret_press ((DECIMAL, 4)) - 锅炉_回水压力
+   ├─ blr_inst_flow ((DECIMAL, 4)) - 锅炉_供水瞬时流量
+   ├─ blr_total_hflow ((DECIMAL, 4)) - 锅炉_供水累计流量
+   ├─ blr_inst_heat ((DECIMAL, 4)) - 锅炉_供水热表瞬热
+   ├─ blr_total_heat ((DECIMAL, 4)) - 锅炉_供水热表累热
+   ├─ blr_gas_inst_flow ((DECIMAL, 4)) - 锅炉_燃气瞬时流量
+   ├─ blr_gas_total_hflow ((DECIMAL, 4)) - 锅炉_燃气累计流量
+   ├─ blr_pump_out_smoke_temp ((DECIMAL, 4)) - 锅炉_省煤气出口_热泵入口烟温
+   ├─ blr_pump_out_smoke_press ((DECIMAL, 4)) - 锅炉_省煤气出口_热泵入口烟压
+   ├─ blr_out_smoke_temp ((DECIMAL, 4)) - 锅炉_锅炉出口_省煤器入口_烟温
+   ├─ blr_out_smoke_press ((DECIMAL, 4)) - 锅炉_锅炉出口_省煤气入口_烟压
+   ├─ blr_fan_out_smoke_temp ((DECIMAL, 4)) - 锅炉_风机_出口烟温
+   ├─ blr_fan_out_smoke_press ((DECIMAL, 4)) - 锅炉_风机_出口风压
+   ├─ blr_fan_gas_press ((DECIMAL, 4)) - 锅炉_风机_燃气压力
+   ├─ blr_fan_elec ((DECIMAL, 4)) - 锅炉_风机_电流
+   ├─ blr_front_container_temp ((DECIMAL, 4)) - 锅炉_前上集装箱温度
+   ├─ blr_back_container_temp ((DECIMAL, 4)) - 锅炉_后上集装箱温度
+   ├─ blr_economizer_in_smoke_temp ((DECIMAL, 4)) - 锅炉_省煤器_进口烟温
+   ├─ blr_economizer_in_smoke_press ((DECIMAL, 4)) - 锅炉_省煤器_进口烟压
+   ├─ blr_economizer_out_smoke_temp ((DECIMAL, 4)) - 锅炉_省煤器_出口烟温
+   ├─ blr_economizer_out_smoke_press ((DECIMAL, 4)) - 锅炉_省煤器_出口烟压
+   ├─ blr_condenser_out_temp ((DECIMAL, 4)) - 锅炉_冷凝器_出水温度
+   ├─ blr_so2 ((DECIMAL, 4)) - 锅炉_环保_出口SO2实测值
+   ├─ blr_zkso2 ((DECIMAL, 4)) - 锅炉_环保_出口SO2折算值
+
+📊 表: ods_sc01_ntjt_zhgr_heat_instruction_issue_detail -> 供热调控阀门下发指令表
+   ├─ id (BIGSERIAL) - ID
+   ├─ strategy_id (BIGINT) - 算法推荐策略详情ID
+   ├─ strategy_version (VARCHAR) - 算法推荐策略版本号
+   ├─ cmd_guid (VARCHAR) - 与SCADA进行通信的唯一标识
+   ├─ valve_id (VARCHAR) - 阀门ID 涌鑫花苑换热站.JZ1_DDFGD
+   ├─ valve_open_issue ((NUMERIC, 2)) - 阀门开度-下发
+   ├─ valve_is_work (CHAR) - 阀门是否工作（0：未动作，1：已动作）
+   ├─ valve_open_issue_inst_time (TIMESTAMP) - 阀门开度-下发后的实际开度的时间
+   ├─ issue_by (INTEGER) - 下发人
+   ├─ issue_time (TIMESTAMP) - 下发时间
+   ├─ issue_json (VARCHAR) - 下发JSON {"cmdGuid":"FK1297994880152240142102001" "code":"200" "msg":"校验成功"}
+   ├─ issue_result (CHAR) - 下发结果：（0：失败，1：成功）
+   ├─ issue_result_time (TIMESTAMP) - 下发结果时间
+   ├─ issue_result_json (VARCHAR) - 下发结果json
+   ├─ issue_fail_reason (VARCHAR) - 下发失败的原因
+   ├─ feedback_time (TIMESTAMP) - 反馈时间
+   ├─ feedback_result (CHAR) - 反馈结果：（0：失败，1：成功）
+   ├─ feedback_json (VARCHAR) - 反馈JSON
+   ├─ create_time (TIMESTAMP) - 创建时间
+   ├─ stn_busi_id (INTEGER) - 换热站业务ID
+   ├─ plant_busi_id (INTEGER) - 热源厂业务ID
+   ├─ send_id (INTEGER) - 指令发送唯一标识
+
+
+✅ Schema解析完成
+
+
+================================================================================
+✅ 初始化完成
+================================================================================
+📊 已加载 8 张表
+📊 已索引 263 个字段
+📊 表名中文字典条目: 8
+📊 字段中文字典条目(表数): 8
+================================================================================
+
+✓ SQL检查器初始化成功
+引擎初始化成功！
+
+开始为复赛打榜评测集生成SQL (25 个问题)...
+
+================================================================================
+
+[1/25] 问题: 2024-2025供暖季商河所有换热站各月电单耗最高的5个换热站分别是哪5个？
+正在加载语义模型: paraphrase-multilingual-MiniLM-L12-v2...
+正在构建语义索引...
+✓ 已构建 18 个公式的语义索引
+✓ 已构建 8 张表的语义索引
+✓ 初始化完成!
+
+================================================================================
+开始处理问题: 2024-2025供暖季商河所有换热站各月电单耗最高的5个换热站分别是哪5个？
+================================================================================
+
+检测到公式相关关键词,开始检索公式...
+
+检索到的公式(混合得分 Top 1):
+  - 换热站指定时段电单耗
+    关键词: 0.600 | 语义: 0.590 | 最终: 0.597
+
+从公式映射中提取到 2 张相关表:
+  - ods_sc01_ntjt_zhgr_heat_station_inst_data
+  - ods_sc01_ntjt_zhgr_heat_station_info
+
+最终选择 3 张数据表:
+  - ods_sc01_ntjt_zhgr_heat_station_inst_data (相似度: 0.871) ✓ [公式映射]
+  - ods_sc01_ntjt_zhgr_heat_station_info (相似度: 0.798) ✓ [公式映射]
+  - ods_sc01_ntjt_zhgr_heat_source_inst_data (相似度: 0.551) 
+示例1: 2024-2025供暖季豪门又一城站各月电单耗最高的是哪一个月?
+  - 语义相似度: 0.833
+  - 关键词得分: 1.000
+  - 综合得分: 0.900
+  - 匹配关键词: 电单耗
+示例2: 2024-2025供暖季豪门又一城站各月的电单耗分别是多少?
+  - 语义相似度: 0.816
+  - 关键词得分: 1.000
+  - 综合得分: 0.890
+  - 匹配关键词: 电单耗
+示例3: 2024-2025供暖季豪门又一城站的电单耗是多少?
+  - 语义相似度: 0.781
+  - 关键词得分: 1.000
+  - 综合得分: 0.869
+  - 匹配关键词: 电单耗
+✗ 生成SQL时出错 (第 1 次): Error code: 403 - {'flag': False, 'message': '无效授权', 'code': '2809'}
+→ 等待2秒后重试...
+✗ 生成SQL时出错 (第 2 次): Error code: 403 - {'flag': False, 'message': '无效授权', 'code': '2809'}
+→ 等待2秒后重试...
+✗ 生成SQL时出错 (第 3 次): Error code: 403 - {'flag': False, 'message': '无效授权', 'code': '2809'}
+正在使用本地数据库对SQL语句进行检查...
+执行状态: False
+错误原因: Empty set
+生成失败: Error code: 403 - {'flag': False, 'message': '无效授权', 'code': '2809'}
+
+[2/25] 问题: 2024-2025供暖季商河热网损失率是多少？
+正在加载语义模型: paraphrase-multilingual-MiniLM-L12-v2...
+正在构建语义索引...
+✓ 已构建 18 个公式的语义索引
+✓ 已构建 8 张表的语义索引
+✓ 初始化完成!
+
+================================================================================
+开始处理问题: 2024-2025供暖季商河热网损失率是多少？
+================================================================================
+
+检测到公式相关关键词,开始检索公式...
+
+检索到的公式(混合得分 Top 1):
+  - 热网指定时段热量损失率
+    关键词: 0.600 | 语义: 0.660 | 最终: 0.618
+
+从公式映射中提取到 2 张相关表:
+  - ods_sc01_ntjt_zhgr_heat_station_inst_data
+  - ods_sc01_ntjt_zhgr_heat_source_inst_data
+
+最终选择 3 张数据表:
+  - ods_sc01_ntjt_zhgr_heat_station_inst_data (相似度: 0.729) ✓ [公式映射]
+  - ods_sc01_ntjt_zhgr_heat_source_inst_data (相似度: 0.664) ✓ [公式映射]
+  - ods_sc01_ntjt_zhgr_heat_heatpump_inst_data (相似度: 0.453) 
+示例1: 2024-2025供暖季商河热网的热单耗是多少?
+  - 语义相似度: 0.899
+  - 关键词得分: 0.000
+  - 综合得分: 0.539
+  - 匹配关键词: 热单耗
+示例2: 2024-2025供暖季商河热源总产热量是多少?
+  - 语义相似度: 0.834
+  - 关键词得分: 0.000
+  - 综合得分: 0.500
+  - 匹配关键词: 总产热量
+示例3: 2024-2025供暖季商河恒泰热源厂的产热量是多少?
+  - 语义相似度: 0.827
+  - 关键词得分: 0.000
+  - 综合得分: 0.496
+  - 匹配关键词: 产热量
+✗ 生成SQL时出错 (第 1 次): Error code: 403 - {'flag': False, 'message': '无效授权', 'code': '2809'}
+→ 等待2秒后重试...
+✗ 生成SQL时出错 (第 2 次): Error code: 403 - {'flag': False, 'message': '无效授权', 'code': '2809'}
+→ 等待2秒后重试...

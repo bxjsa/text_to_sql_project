@@ -1,0 +1,2117 @@
+{
+  "db_id": "heating_system",
+  "tables": {
+    "ods_sc01_ntjt_zhgr_heat_station_inst_data": {
+      "table_name": "ods_sc01_ntjt_zhgr_heat_station_inst_data",
+      "description": "换热站实时数据表",
+      "fields": {
+        "stn_id": {
+          "type": "int",
+          "description": "站点ID",
+          "constraints": [],
+          "examples": [
+            "2012"
+          ]
+        },
+        "data_time": {
+          "type": "datetime",
+          "description": "数据时间",
+          "constraints": [],
+          "examples": ["2024-11-01 00:00:04"]
+        },
+        "data_id": {
+          "type": "bigint",
+          "description": "数据ID自增",
+          "constraints": [],
+          "examples": [
+            "1199882231"
+          ]
+        },
+        "data_storage_time": {
+          "type": "datetime",
+          "description": "加载数据的时间",
+          "constraints": [],
+          "examples": ["2024-11-01 00:00:44"]
+        },
+        "stn_prim_sup_temp": {
+          "type": "decimal",
+          "description": "一次网供水温度",
+          "constraints": [
+            "30, 100"
+          ],
+          "examples": [
+            "50.0200"
+          ]
+        },
+        "stn_prim_ret_temp": {
+          "type": "decimal",
+          "description": "一次网回水温度",
+          "constraints": [
+            "20, 90"
+          ],
+          "examples": [
+            "39.5700"
+          ]
+        },
+        "stn_prim_sup_bdirt_press": {
+          "type": "decimal",
+          "description": "一次网供水污前压力",
+          "constraints": [
+            "0.01, 1"
+          ],
+          "examples": [
+            "0.3891"
+          ]
+        },
+        "stn_prim_sup_adirt_press": {
+          "type": "decimal",
+          "description": "一次网供水污后压力",
+          "constraints": [],
+          "examples": []
+        },
+        "stn_prim_ret_press": {
+          "type": "decimal",
+          "description": "一次网回水压力",
+          "constraints": [
+            "0.01, 1"
+          ],
+          "examples": [
+            "0.3880"
+          ]
+        },
+        "stn_prim_sup_htemp": {
+          "type": "decimal",
+          "description": "一次网热表供水温度",
+          "constraints": [
+            "30, 100"
+          ],
+          "examples": [
+            "20.0200"
+          ]
+        },
+        "stn_prim_ret_htemp": {
+          "type": "decimal",
+          "description": "一次网热表回水温度",
+          "constraints": [
+            "20, 90"
+          ],
+          "examples": [
+            "19.5700"
+          ]
+        },
+        "stn_prim_inst_hflow": {
+          "type": "decimal",
+          "description": "一次网热表瞬时流量",
+          "constraints": [
+            "1, 500"
+          ],
+          "examples": [
+            "0.0000"
+          ]
+        },
+        "stn_prim_total_hflow": {
+          "type": "decimal",
+          "description": "一次网热表累计流量",
+          "constraints": [],
+          "examples": [
+            "1032588.0000"
+          ]
+        },
+        "stn_prim_inst_hheat": {
+          "type": "decimal",
+          "description": "一次网热表瞬时热量",
+          "constraints": [
+            "1, 50"
+          ],
+          "examples": [
+            "0.0000"
+          ]
+        },
+        "stn_prim_total_hheat": {
+          "type": "decimal",
+          "description": "一次网热表累计热量",
+          "constraints": [],
+          "examples": [
+            "159746.4531"
+          ]
+        },
+        "stn_eney_sup_temp": {
+          "type": "decimal",
+          "description": "新能源供水温度",
+          "constraints": [],
+          "examples": []
+        },
+        "stn_eney_ret_temp": {
+          "type": "decimal",
+          "description": "新能源回水温度",
+          "constraints": [],
+          "examples": []
+        },
+        "stn_eney_sup_bdirt_press": {
+          "type": "decimal",
+          "description": "新能源供水污前压力",
+          "constraints": [],
+          "examples": [
+            "0.0033"
+          ]
+        },
+        "stn_eney_sup_adirt_press": {
+          "type": "decimal",
+          "description": "新能源供水污后压力",
+          "constraints": [],
+          "examples": [
+            "0.0132"
+          ]
+        },
+        "stn_eney_ret_press": {
+          "type": "decimal",
+          "description": "新能源回水压力",
+          "constraints": [],
+          "examples": [
+            "0.0000"
+          ]
+        },
+        "stn_eney_sup_htemp": {
+          "type": "decimal",
+          "description": "新能源热表供水温度",
+          "constraints": [],
+          "examples": [
+            "21.3200"
+          ]
+        },
+        "stn_eney_ret_htemp": {
+          "type": "decimal",
+          "description": "新能源热表回水温度",
+          "constraints": [],
+          "examples": [
+            "21.0800"
+          ]
+        },
+        "stn_eney_inst_hflow": {
+          "type": "decimal",
+          "description": "新能源热表瞬时流量",
+          "constraints": [],
+          "examples": [
+            "0.0000"
+          ]
+        },
+        "stn_eney_total_hflow": {
+          "type": "decimal",
+          "description": "新能源热表累计流量",
+          "constraints": [],
+          "examples": [
+            "601263.3125"
+          ]
+        },
+        "stn_eney_inst_hheat": {
+          "type": "decimal",
+          "description": "新能源热表瞬时热量",
+          "constraints": [],
+          "examples": [
+            "0.0000"
+          ]
+        },
+        "stn_eney_total_hheat": {
+          "type": "decimal",
+          "description": "新能源热表累计热量",
+          "constraints": [],
+          "examples": [
+            "45252.4883"
+          ]
+        },
+        "stn_inst_elec": {
+          "type": "decimal",
+          "description": "瞬时用电功率",
+          "constraints": [],
+          "examples": [
+            "129987.6016"
+          ]
+        },
+        "stn_total_elec": {
+          "type": "decimal",
+          "description": "累计用电电度",
+          "constraints": [],
+          "examples": [
+            "129987.6016"
+          ]
+        },
+        "plant1_id": {
+          "type": "bigint",
+          "description": "机组1ID",
+          "constraints": [],
+          "examples": [
+            "201201"
+          ]
+        },
+        "stn1_set_elec_valve_open": {
+          "type": "decimal",
+          "description": "电动调节阀给定开度1",
+          "constraints": [
+            "0, 100"
+          ],
+          "examples": [
+            "71.3000"
+          ]
+        },
+        "stn1_inst_elec_valve_open": {
+          "type": "decimal",
+          "description": "电动调节阀实际开度1",
+          "constraints": [
+            "0, 100"
+          ],
+          "examples": [
+            "71.3537"
+          ]
+        },
+        "stn1_seco_sup_temp": {
+          "type": "decimal",
+          "description": "二次网供水温度1",
+          "constraints": [
+            "30, 80"
+          ],
+          "examples": [
+            "40.8000"
+          ]
+        },
+        "stn1_seco_ret_temp": {
+          "type": "decimal",
+          "description": "二次网回水温度1",
+          "constraints": [
+            "20, 70"
+          ],
+          "examples": [
+            "30.9000"
+          ]
+        },
+        "stn1_seco_sup_press": {
+          "type": "decimal",
+          "description": "二次网供水压力1",
+          "constraints": [
+            "0.01, 1"
+          ],
+          "examples": [
+            "0.3972"
+          ]
+        },
+        "stn1_seco_ret_bdirt_press": {
+          "type": "decimal",
+          "description": "二次网回水污前压力1",
+          "constraints": [
+            "0.01, 1"
+          ],
+          "examples": [
+            "0.3543"
+          ]
+        },
+        "stn1_seco_ret_adirt_press": {
+          "type": "decimal",
+          "description": "二次网回水污后压力1",
+          "constraints": [],
+          "examples": []
+        },
+        "stn1_seco_sup_htemp": {
+          "type": "decimal",
+          "description": "二次网热表供水温度1",
+          "constraints": [
+            "30, 80"
+          ],
+          "examples": [
+            "49.6000"
+          ]
+        },
+        "stn1_seco_ret_htemp": {
+          "type": "decimal",
+          "description": "二次网热表回水温度1",
+          "constraints": [
+            "20, 70"
+          ],
+          "examples": [
+            "39.8800"
+          ]
+        },
+        "stn1_seco_inst_hflow": {
+          "type": "decimal",
+          "description": "二次网热表瞬时流量1",
+          "constraints": [
+            "1, 500"
+          ],
+          "examples": [
+            "351.3170"
+          ]
+        },
+        "stn1_seco_total_hflow": {
+          "type": "decimal",
+          "description": "二次网热表累计流量1",
+          "constraints": [],
+          "examples": [
+            "1489721.0000"
+          ]
+        },
+        "stn1_seco_inst_hheat": {
+          "type": "decimal",
+          "description": "二次网热表瞬时热量1",
+          "constraints": [
+            "1, 50"
+          ],
+          "examples": [
+            "0.2520"
+          ]
+        },
+        "stn1_seco_total_hheat": {
+          "type": "decimal",
+          "description": "二次网热表累计热量1",
+          "constraints": [],
+          "examples": [
+            "28709.3711"
+          ]
+        },
+        "stn1_seco_repl_inst_flow": {
+          "type": "decimal",
+          "description": "补水瞬时流量1",
+          "constraints": [],
+          "examples": [
+            "0.0000"
+          ]
+        },
+        "stn1_seco_repl_total_flow": {
+          "type": "decimal",
+          "description": "补水累计流量1",
+          "constraints": [],
+          "examples": [
+            "17888.0000"
+          ]
+        },
+        "plant2_id": {
+          "type": "bigint",
+          "description": "机组2ID",
+          "constraints": [],
+          "examples": []
+        },
+        "stn2_set_elec_valve_open": {
+          "type": "decimal",
+          "description": "电动调节阀给定开度2",
+          "constraints": [
+            "0, 100"
+          ],
+          "examples": []
+        },
+        "stn2_inst_elec_valve_open": {
+          "type": "decimal",
+          "description": "电动调节阀实际开度2",
+          "constraints": [
+            "0, 100"
+          ],
+          "examples": []
+        },
+        "stn2_seco_sup_temp": {
+          "type": "decimal",
+          "description": "二次网供水温度2",
+          "constraints": [
+            "30, 80"
+          ],
+          "examples": []
+        },
+        "stn2_seco_ret_temp": {
+          "type": "decimal",
+          "description": "二次网回水温度2",
+          "constraints": [
+            "20, 70"
+          ],
+          "examples": []
+        },
+        "stn2_seco_sup_press": {
+          "type": "decimal",
+          "description": "二次网供水压力2",
+          "constraints": [
+            "0.01, 1"
+          ],
+          "examples": []
+        },
+        "stn2_seco_ret_bdirt_press": {
+          "type": "decimal",
+          "description": "二次网回水污前压力2",
+          "constraints": [
+            "0.01, 1"
+          ],
+          "examples": []
+        },
+        "stn2_seco_ret_adirt_press": {
+          "type": "decimal",
+          "description": "二次网回水污后压力2",
+          "constraints": [],
+          "examples": []
+        },
+        "stn2_seco_sup_htemp": {
+          "type": "decimal",
+          "description": "二次网热表供水温度2",
+          "constraints": [
+            "30, 80"
+          ],
+          "examples": []
+        },
+        "stn2_seco_ret_htemp": {
+          "type": "decimal",
+          "description": "二次网热表回水温度2",
+          "constraints": [
+            "20, 70"
+          ],
+          "examples": []
+        },
+        "stn2_seco_inst_hflow": {
+          "type": "decimal",
+          "description": "二次网热表瞬时流量2",
+          "constraints": [
+            "1, 500"
+          ],
+          "examples": []
+        },
+        "stn2_seco_total_hflow": {
+          "type": "decimal",
+          "description": "二次网热表累计流量2",
+          "constraints": [],
+          "examples": []
+        },
+        "stn2_seco_inst_hheat": {
+          "type": "decimal",
+          "description": "二次网热表瞬时热量2",
+          "constraints": [
+            "1, 50"
+          ],
+          "examples": []
+        },
+        "stn2_seco_total_hheat": {
+          "type": "decimal",
+          "description": "二次网热表累计热量2",
+          "constraints": [],
+          "examples": []
+        },
+        "stn2_seco_repl_inst_flow": {
+          "type": "decimal",
+          "description": "补水瞬时流量2",
+          "constraints": [],
+          "examples": []
+        },
+        "stn2_seco_repl_total_flow": {
+          "type": "decimal",
+          "description": "补水累计流量2",
+          "constraints": [],
+          "examples": []
+        },
+        "plant3_id": {
+          "type": "bigint",
+          "description": "机组3ID",
+          "constraints": [],
+          "examples": []
+        },
+        "stn3_set_elec_valve_open": {
+          "type": "decimal",
+          "description": "电动调节阀给定开度3",
+          "constraints": [
+            "0, 100"
+          ],
+          "examples": []
+        },
+        "stn3_inst_elec_valve_open": {
+          "type": "decimal",
+          "description": "电动调节阀实际开度3",
+          "constraints": [
+            "0, 100"
+          ],
+          "examples": []
+        },
+        "stn3_seco_sup_temp": {
+          "type": "decimal",
+          "description": "二次网供水温度3",
+          "constraints": [
+            "30, 80"
+          ],
+          "examples": []
+        },
+        "stn3_seco_ret_temp": {
+          "type": "decimal",
+          "description": "二次网回水温度3",
+          "constraints": [
+            "20, 70"
+          ],
+          "examples": []
+        },
+        "stn3_seco_sup_press": {
+          "type": "decimal",
+          "description": "二次网供水压力3",
+          "constraints": [
+            "0.01, 1"
+          ],
+          "examples": []
+        },
+        "stn3_seco_ret_bdirt_press": {
+          "type": "decimal",
+          "description": "二次网回水污前压力3",
+          "constraints": [
+            "0.01, 1"
+          ],
+          "examples": []
+        },
+        "stn3_seco_ret_adirt_press": {
+          "type": "decimal",
+          "description": "二次网回水污后压力3",
+          "constraints": [],
+          "examples": []
+        },
+        "stn3_seco_sup_htemp": {
+          "type": "decimal",
+          "description": "二次网热表供水温度3",
+          "constraints": [
+            "30, 80"
+          ],
+          "examples": []
+        },
+        "stn3_seco_ret_htemp": {
+          "type": "decimal",
+          "description": "二次网热表回水温度3",
+          "constraints": [
+            "20, 70"
+          ],
+          "examples": []
+        },
+        "stn3_seco_inst_hflow": {
+          "type": "decimal",
+          "description": "二次网热表瞬时流量3",
+          "constraints": [
+            "1, 500"
+          ],
+          "examples": []
+        },
+        "stn3_seco_total_hflow": {
+          "type": "decimal",
+          "description": "二次网热表累计流量3",
+          "constraints": [],
+          "examples": []
+        },
+        "stn3_seco_inst_hheat": {
+          "type": "decimal",
+          "description": "二次网热表瞬时热量3",
+          "constraints": [
+            "1, 50"
+          ],
+          "examples": []
+        },
+        "stn3_seco_total_hheat": {
+          "type": "decimal",
+          "description": "二次网热表累计热量3",
+          "constraints": [],
+          "examples": []
+        },
+        "stn3_seco_repl_inst_flow": {
+          "type": "decimal",
+          "description": "补水瞬时流量3",
+          "constraints": [],
+          "examples": []
+        },
+        "stn3_seco_repl_total_flow": {
+          "type": "decimal",
+          "description": "补水累计流量3",
+          "constraints": [],
+          "examples": []
+        }
+      },
+      "business_rules": [
+        "主键字段: data_id",
+        "时间相关字段: data_time, data_storage_time"
+      ],
+      "relationships": []
+    },
+    "ods_sc01_ntjt_zhgr_heat_station_info": {
+      "table_name": "ods_sc01_ntjt_zhgr_heat_station_info",
+      "description": "换热站业务信息表",
+      "fields": {
+        "id": {
+          "type": "integer",
+          "description": "自增整数类型，用于唯一标识记录",
+          "constraints": [],
+          "examples": [
+            "2024"
+          ]
+        },
+        "stn_name": {
+          "type": "character varying",
+          "description": "换热站名称 红星天铂八地块站，换热站名称可以近似的认为是小区名称",
+          "constraints": [],
+          "examples": []
+        },
+        "stn_state": {
+          "type": "character",
+          "description": "换热站状态（0：在运，1：停运，2：维修）",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "plan_num": {
+          "type": "integer",
+          "description": "机组数量",
+          "constraints": [],
+          "examples": [
+            "2"
+          ]
+        },
+        "heat_method": {
+          "type": "character",
+          "description": "采暖方式 (0: 地暖 / 1: 挂暖 / 2: 中央空调 / 3: 挂暖 + 中央空调)",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "build_type": {
+          "type": "character",
+          "description": "站点性质 (0: 居民 / 1: 公建 / 2: 医院 / 3: 学校 / 4: 工业)",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "site_type": {
+          "type": "character",
+          "description": "站点类型（0：监控站，1：人工站，2：自管站）",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "heat_area": {
+          "type": "numeric",
+          "description": "供热面积（默认）",
+          "constraints": [],
+          "examples": [
+            "41330.80"
+          ]
+        },
+        "state_time": {
+          "type": "timestamp without time zone",
+          "description": "状态变更时间",
+          "constraints": [],
+          "examples": []
+        },
+        "build_time": {
+          "type": "timestamp without time zone",
+          "description": "建设时间",
+          "constraints": [],
+          "examples": [
+            "83324.80"
+          ]
+        },
+        "mesh_area": {
+          "type": "numeric",
+          "description": "入网面积 (建筑面积)",
+          "constraints": [],
+          "examples": []
+        },
+        "trans_area": {
+          "type": "numeric",
+          "description": "传热面积",
+          "constraints": [],
+          "examples": []
+        },
+        "actual_area": {
+          "type": "numeric",
+          "description": "实际供暖面积",
+          "constraints": [],
+          "examples": []
+        },
+        "belong_unit": {
+          "type": "character varying",
+          "description": "所属单位",
+          "constraints": [],
+          "examples": ["商河恒泰供热公司"]
+        },
+        "longitude": {
+          "type": "numeric",
+          "description": "经度",
+          "constraints": [],
+          "examples": [
+            "117.151121"
+          ]
+        },
+        "latitude": {
+          "type": "numeric",
+          "description": "纬度",
+          "constraints": [],
+          "examples": [
+            "37.293410"
+          ]
+        },
+        "charge_person": {
+          "type": "character varying",
+          "description": "负责人",
+          "constraints": [],
+          "examples": ["燕景浩"]
+        },
+        "contact_info": {
+          "type": "character varying",
+          "description": "联系人",
+          "constraints": [],
+          "examples": [
+            "15624072319"
+          ]
+        },
+        "site_addr": {
+          "type": "character varying",
+          "description": "热站地址",
+          "constraints": [],
+          "examples": []
+        },
+        "create_by": {
+          "type": "character varying",
+          "description": "",
+          "constraints": [],
+          "examples": []
+        },
+        "create_time": {
+          "type": "timestamp without time zone",
+          "description": "",
+          "constraints": [],
+          "examples": ["2024-10-14 21:57:17.029802"]
+        },
+        "update_by": {
+          "type": "character varying",
+          "description": "",
+          "constraints": [],
+          "examples": []
+        },
+        "update_time": {
+          "type": "timestamp",
+          "description": "without time zone",
+          "constraints": [],
+          "examples": []
+        },
+        "is_delete": {
+          "type": "character",
+          "description": "0：未删除 1：已删除",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "remark": {
+          "type": "character varying",
+          "description": "",
+          "constraints": [],
+          "examples": []
+        },
+        "distance": {
+          "type": "numeric",
+          "description": "距离（拓扑距离）真实管网距离",
+          "constraints": [],
+          "examples": []
+        },
+        "stn_id": {
+          "type": "integer",
+          "description": "实时表中对应的换热站",
+          "constraints": [],
+          "examples": [
+            "id 2024"
+          ]
+        },
+        "heatstation_code": {
+          "type": "character varying",
+          "description": "ERP中换热站唯一编码",
+          "constraints": [],
+          "examples": ["H2023252"]
+        },
+        "source_num": {
+          "type": "integer",
+          "description": "热源数量",
+          "constraints": [],
+          "examples": [
+            "1"
+          ]
+        },
+        "valve_num": {
+          "type": "integer",
+          "description": "阀门数量",
+          "constraints": [],
+          "examples": [
+            "2"
+          ]
+        },
+        "source_type": {
+          "type": "character",
+          "description": "热源形式：(0: 地热井 / 风冷螺杆机 / 1: 空气源热泵 / 2: 燃气锅炉 / 3: 燃空气源热泵 / 4: 水网 / 5: 基汽 / 6: 综合能源)",
+          "constraints": [],
+          "examples": [
+            "4"
+          ]
+        },
+        "energy_save_type": {
+          "type": "character",
+          "description": "节能类型：(0: 非节能 / 1: 一步节能 / 2: 二步节能 / 3: 三步节能 / 4: 四步节能)",
+          "constraints": [],
+          "examples": [
+            "4"
+          ]
+        },
+        "serial_num": {
+          "type": "integer",
+          "description": "站点排序",
+          "constraints": [],
+          "examples": []
+        }
+      },
+      "business_rules": [
+        "主键字段: id",
+        "时间相关字段: state_time, build_time, create_time, update_by, update_time"
+      ],
+      "relationships": [
+        "ods_sc01_ntjt_zhgr_heat_station_info.stn_id=ods_sc01_ntjt_zhgr_heat_station_inst_data.stn_id"
+      ]
+    },
+    "ods_sc01_ntjt_zhgr_heat_source_inst_data": {
+      "table_name": "ods_sc01_ntjt_zhgr_heat_source_inst_data",
+      "description": "热源实时数据表",
+      "fields": {
+        "src_id": {
+          "type": "int",
+          "description": "热源ID",
+          "constraints": [],
+          "examples": ["2"]
+        },
+        "data_time": {
+          "type": "datetime",
+          "description": "采集时间",
+          "constraints": [],
+          "examples": ["2025-01-01 00:00:50"]
+        },
+        "data_id": {
+          "type": "bigint",
+          "description": "数据ID自增",
+          "constraints": [],
+          "examples": ["86"]
+        },
+        "data_storage_time": {
+          "type": "datetime",
+          "description": "落库时间",
+          "constraints": [],
+          "examples": []
+        },
+        "src_repl_inst_flow": {
+          "type": "decimal",
+          "description": "瞬时用水量",
+          "constraints": [],
+          "examples": []
+        },
+        "src_repl_total_flow": {
+          "type": "decimal",
+          "description": "累计用水量",
+          "constraints": [],
+          "examples": []
+        },
+        "src_inst_elec": {
+          "type": "decimal",
+          "description": "瞬时电功率",
+          "constraints": [],
+          "examples": []
+        },
+        "src_total_elec": {
+          "type": "decimal",
+          "description": "累计用电量",
+          "constraints": [],
+          "examples": []
+        },
+        "src_run_load": {
+          "type": "decimal",
+          "description": "运行负荷",
+          "constraints": [],
+          "examples": []
+        },
+        "src_sup_temp": {
+          "type": "decimal",
+          "description": "供水温度",
+          "constraints": ["40,120"],
+          "examples": ["54"]
+        },
+        "src_sup_press": {
+          "type": "decimal",
+          "description": "供水压力",
+          "constraints": ["0.01,1"],
+          "examples": ["1"]
+        },
+        "src_sup_sup_htemp": {
+          "type": "decimal",
+          "description": "供水热表供温",
+          "constraints": ["40,120"],
+          "examples": ["54"]
+        },
+        "src_sup_ret_htemp": {
+          "type": "decimal",
+          "description": "供水热表回温",
+          "constraints": ["30,100"],
+          "examples": []
+        },
+        "src_sup_inst_hflow": {
+          "type": "decimal",
+          "description": "热表供水瞬时流量",
+          "constraints": ["1,3500"],
+          "examples": ["2779"]
+        },
+        "src_sup_total_hflow": {
+          "type": "decimal",
+          "description": "热表供水累计流量",
+          "constraints": [],
+          "examples": ["2481597"]
+        },
+        "src_sup_inst_hheat": {
+          "type": "decimal",
+          "description": "热表供水瞬时热量",
+          "constraints": ["1,600"],
+          "examples": ["162"]
+        },
+        "src_sup_total_hheat": {
+          "type": "decimal",
+          "description": "热表供水累计热量",
+          "constraints": [],
+          "examples": ["714622"]
+        },
+        "src_ret_temp": {
+          "type": "decimal",
+          "description": "回水温度",
+          "constraints": ["30,100"],
+          "examples": ["38"]
+        },
+        "src_ret_press": {
+          "type": "decimal",
+          "description": "回水压力",
+          "constraints": ["0.01,1"],
+          "examples": ["0"]
+        },
+        "src_ret_sup_htemp": {
+          "type": "decimal",
+          "description": "回水热表供温",
+          "constraints": [],
+          "examples": []
+        },
+        "src_ret_ret_htemp": {
+          "type": "decimal",
+          "description": "回水热表回温",
+          "constraints": [],
+          "examples": ["39"]
+        },
+        "src_ret_inst_hflow": {
+          "type": "decimal",
+          "description": "回水瞬时流量",
+          "constraints": [],
+          "examples": ["2779"]
+        },
+        "src_ret_total_hflow": {
+          "type": "decimal",
+          "description": "回水累计流量",
+          "constraints": [],
+          "examples": ["2377179"]
+        },
+        "src_ret_inst_hheat": {
+          "type": "decimal",
+          "description": "回水瞬时热量",
+          "constraints": [],
+          "examples": ["181"]
+        },
+        "src_ret_total_hheat": {
+          "type": "decimal",
+          "description": "回水累计热量",
+          "constraints": [],
+          "examples": ["731239"]
+        },
+        "src_ret_set_elec_valve_open": {
+          "type": "decimal",
+          "description": "回水阀门设定开度",
+          "constraints": [],
+          "examples": []
+        },
+        "src_ret_inst_elec_valve_open": {
+          "type": "decimal",
+          "description": "回水阀门实际开度",
+          "constraints": [],
+          "examples": []
+        }
+      },
+      "business_rules": [
+        "主键字段: data_id",
+        "时间相关字段: data_time, data_storage_time"
+      ],
+      "relationships": []
+    },
+    "ods_sc01_ntjt_zhgr_heat_weather_info_log": {
+      "table_name": "ods_sc01_ntjt_zhgr_heat_weather_info_log",
+      "description": "商河县历史天气数据表",
+      "fields": {
+        "data_time": {
+          "type": "datetime",
+          "description": "时间",
+          "constraints": [],
+          "examples": ["2024-11-17 00:00:00"]
+        },
+        "data_id": {
+          "type": "bigint",
+          "description": "数据ID自增",
+          "constraints": [],
+          "examples": [
+            "40641"
+          ]
+        },
+        "temp": {
+          "type": "decimal",
+          "description": "气温",
+          "constraints": [],
+          "examples": [
+            "18.40"
+          ]
+        },
+        "solar": {
+          "type": "decimal",
+          "description": "太阳辐射",
+          "constraints": [],
+          "examples": [
+            "120"
+          ]
+        },
+        "longitude": {
+          "type": "decimal",
+          "description": "经度",
+          "constraints": [],
+          "examples": [
+            "117.200000"
+          ]
+        },
+        "latitude": {
+          "type": "decimal",
+          "description": "纬度",
+          "constraints": [],
+          "examples": ["37.330000.00"]
+        },
+        "altitude": {
+          "type": "decimal",
+          "description": "海拔",
+          "constraints": [],
+          "examples": [
+            "50"
+          ]
+        },
+        "rh": {
+          "type": "decimal",
+          "description": "相对湿度",
+          "constraints": [],
+          "examples": [
+            "62.40"
+          ]
+        },
+        "wind_dir": {
+          "type": "decimal",
+          "description": "风向",
+          "constraints": [],
+          "examples": [
+            "171.10"
+          ]
+        },
+        "wind_speed": {
+          "type": "decimal",
+          "description": "风速",
+          "constraints": [],
+          "examples": [
+            "2.30"
+          ]
+        },
+        "air_pressure": {
+          "type": "decimal",
+          "description": "气压",
+          "constraints": [],
+          "examples": [
+            "1015.00"
+          ]
+        },
+        "rain": {
+          "type": "decimal",
+          "description": "降水量(mm)",
+          "constraints": [],
+          "examples": [
+            "2.00"
+          ]
+        },
+        "cloudiness_all": {
+          "type": "decimal",
+          "description": "总云量(%)",
+          "constraints": [],
+          "examples": [
+            "60.00"
+          ]
+        },
+        "cloudiness_low": {
+          "type": "decimal",
+          "description": "低云量(%)",
+          "constraints": [],
+          "examples": [
+            "30.00"
+          ]
+        },
+        "weather_code": {
+          "type": "int",
+          "description": "天气现象(代码)0:晴,1:多云,2:阴,7:小雨",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "weather_desc": {
+          "type": "varchar",
+          "description": "天气现象(描述)0:晴,1:多云,2:阴,7:小雨",
+          "constraints": [],
+          "examples": ["晴"]
+        },
+        "rh_max": {
+          "type": "decimal",
+          "description": "最大相对湿度(%)",
+          "constraints": [],
+          "examples": [
+            "75.00"
+          ]
+        },
+        "rh_min": {
+          "type": "decimal",
+          "description": "最小相对湿度(%)",
+          "constraints": [],
+          "examples": [
+            "60.00"
+          ]
+        }
+      },
+      "business_rules": [
+        "主键字段: data_id",
+        "时间相关字段: data_time",
+        "包含温度监测数据",
+        "包含压力监测数据"
+      ],
+      "relationships": []
+    },
+    "ods_sc01_ntjt_zhgr_heat_source_info": {
+      "table_name": "ods_sc01_ntjt_zhgr_heat_source_info",
+      "description": "供热热源厂信息表",
+      "fields": {
+        "id": {
+          "type": "int",
+          "description": "数据主键ID自增",
+          "constraints": [],
+          "examples": [
+            "1"
+          ]
+        },
+        "src_name": {
+          "type": "varchar",
+          "description": "热源名称",
+          "constraints": [],
+          "examples": ["商河恒泰热源厂"]
+        },
+        "src_id": {
+          "type": "int",
+          "description": "实时数据表中的热源ID",
+          "constraints": [],
+          "examples": [
+            "1"
+          ]
+        },
+        "src_type": {
+          "type": "bpchar",
+          "description": "热源类型(0：燃煤锅炉1：燃气锅炉2：电锅炉3：热电联产4：能源站)",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "src_state": {
+          "type": "bpchar",
+          "description": "热源状态(0：在运，1：停运，2：维修)",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "state_time": {
+          "type": "timestamp",
+          "description": "状态变更时间",
+          "constraints": [],
+          "examples": ["2024-10-08 17:34:23"]
+        },
+        "build_time": {
+          "type": "timestamp",
+          "description": "建设时间",
+          "constraints": [],
+          "examples": ["2024-09-26 00:00:00"]
+        },
+        "heat_area": {
+          "type": "numeric",
+          "description": "供热面积",
+          "constraints": [],
+          "examples": [
+            "3300000.00"
+          ]
+        },
+        "mesh_area": {
+          "type": "numeric",
+          "description": "入网面积",
+          "constraints": [],
+          "examples": [
+            "3300000.00"
+          ]
+        },
+        "design_heat": {
+          "type": "numeric",
+          "description": "设计供热能力",
+          "constraints": [],
+          "examples": [
+            "41.00"
+          ]
+        },
+        "actual_heat": {
+          "type": "numeric",
+          "description": "实际供热能力",
+          "constraints": [],
+          "examples": [
+            "189.00"
+          ]
+        },
+        "heat_price": {
+          "type": "numeric",
+          "description": "热单价",
+          "constraints": [],
+          "examples": [
+            "28.50"
+          ]
+        },
+        "belong_unit": {
+          "type": "varchar",
+          "description": "所属单位",
+          "constraints": [],
+          "examples": ["济南市商河恒泰供热有限公司"]
+        },
+        "charge_person": {
+          "type": "varchar",
+          "description": "负责人",
+          "constraints": [],
+          "examples": ["董作军"]
+        },
+        "contact_info": {
+          "type": "varchar",
+          "description": "联系人电话",
+          "constraints": [],
+          "examples": ["NULL"]
+        },
+        "site_addr": {
+          "type": "varchar",
+          "description": "地址",
+          "constraints": [],
+          "examples": ["NULL"]
+        },
+        "create_by": {
+          "type": "varchar",
+          "description": "信息创建人",
+          "constraints": [],
+          "examples": ["NULL"]
+        },
+        "create_time": {
+          "type": "timestamp",
+          "description": "信息创建时间",
+          "constraints": [],
+          "examples": ["2024-07-31 14:39:28"]
+        },
+        "update_by": {
+          "type": "varchar",
+          "description": "信息更新人",
+          "constraints": [],
+          "examples": [
+            "1"
+          ]
+        },
+        "update_time": {
+          "type": "timestamp",
+          "description": "信息更新时间",
+          "constraints": [],
+          "examples": ["2024-10-09 16:45:56"]
+        },
+        "is_delete": {
+          "type": "bpchar",
+          "description": "是否删除(0：未删除, 1：已删除)",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "remark": {
+          "type": "varchar",
+          "description": "备注",
+          "constraints": [],
+          "examples": ["NULL"]
+        },
+        "longitude": {
+          "type": "numeric",
+          "description": "经度",
+          "constraints": [],
+          "examples": [
+            "117.138852"
+          ]
+        },
+        "latitude": {
+          "type": "numeric",
+          "description": "纬度",
+          "constraints": [],
+          "examples": [
+            "37.293886"
+          ]
+        },
+        "load_coefficient": {
+          "type": "numeric",
+          "description": "负荷预测修正系数",
+          "constraints": [],
+          "examples": [
+            "1"
+          ]
+        }
+      },
+      "business_rules": [
+        "主键字段: id",
+        "时间相关字段: state_time, build_time, create_time, update_by, update_time"
+      ],
+      "relationships": [
+        "ods_sc01_ntjt_zhgr_heat_source_info.src_id=ods_sc01_ntjt_zhgr_heat_source_inst_data.src_id"
+      ]
+    },
+    "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data": {
+      "table_name": "ods_sc01_ntjt_zhgr_heat_heatpump_inst_data",
+      "description": "热源厂热泵实时数据表",
+      "fields": {
+        "data_time": {
+          "type": "datetime",
+          "description": "采集时间",
+          "constraints": [],
+          "examples": ["2025/2/9 22:00:24"]
+        },
+        "pump_id": {
+          "type": "varchar(10)",
+          "description": "ID",
+          "constraints": [],
+          "examples": [
+            "2"
+          ]
+        },
+        "data_id": {
+          "type": "bigint(20)",
+          "description": "数据ID自增",
+          "constraints": [],
+          "examples": [
+            "3921074374"
+          ]
+        },
+        "data_storage_time": {
+          "type": "datetime",
+          "description": "Time when the data is loaded",
+          "constraints": [],
+          "examples": ["2025/2/10 10:36:29"]
+        },
+        "generator_smoke_out_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "发生器_烟气出口温度",
+          "constraints": [],
+          "examples": [
+            "92.3"
+          ]
+        },
+        "generator_gas_in_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "发生器_燃气入口压力",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "generator_gas_in_elec_valve_open": {
+          "type": "decimalv3(10, 4)",
+          "description": "发生器_燃气入口阀门开度",
+          "constraints": [],
+          "examples": [
+            "45"
+          ]
+        },
+        "solution_in_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "溶液板换_入口温度",
+          "constraints": [],
+          "examples": [
+            "41.3"
+          ]
+        },
+        "solution_out_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "溶液板换_出口温度",
+          "constraints": [],
+          "examples": [
+            "78"
+          ]
+        },
+        "dilute_solution_set_frequency": {
+          "type": "decimalv3(10, 4)",
+          "description": "稀溶液泵_频率给定",
+          "constraints": [],
+          "examples": [
+            "30"
+          ]
+        },
+        "concentrated_solution_set_frequency": {
+          "type": "decimalv3(10, 4)",
+          "description": "浓溶液泵_频率给定",
+          "constraints": [],
+          "examples": [
+            "42"
+          ]
+        },
+        "condenser_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "冷凝器_冷凝温度",
+          "constraints": [],
+          "examples": [
+            "50.5"
+          ]
+        },
+        "evaporator_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "蒸发器_蒸发温度",
+          "constraints": [],
+          "examples": [
+            "20.2"
+          ]
+        },
+        "refrigerant_pump_set_frequency": {
+          "type": "decimalv3(10, 4)",
+          "description": "冷剂泵_频率给定",
+          "constraints": [],
+          "examples": [
+            "38.9"
+          ]
+        },
+        "heat_network_in_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "热网水入口温度",
+          "constraints": [],
+          "examples": [
+            "36.8"
+          ]
+        },
+        "heat_network_in_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "热网水入口压力",
+          "constraints": [],
+          "examples": [
+            "0.3999"
+          ]
+        },
+        "heat_network_out_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "热网水出口温度",
+          "constraints": [],
+          "examples": [
+            "48"
+          ]
+        },
+        "heat_network_out_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "热网水出口压力",
+          "constraints": [],
+          "examples": [
+            "0.4663"
+          ]
+        },
+        "spray_water_out_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "喷淋水出口温度",
+          "constraints": [],
+          "examples": [
+            "40.1"
+          ]
+        },
+        "spray_water_out_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "喷淋水出口压力",
+          "constraints": [],
+          "examples": [
+            "0.05"
+          ]
+        },
+        "circulate_water_sup_htemp": {
+          "type": "decimalv3(10, 4)",
+          "description": "循环水热表_供水温度",
+          "constraints": [],
+          "examples": [
+            "45.92"
+          ]
+        },
+        "circulate_water_ret_htemp": {
+          "type": "decimalv3(10, 4)",
+          "description": "循环水热表_回水温度",
+          "constraints": [],
+          "examples": [
+            "35.36"
+          ]
+        },
+        "circulate_water_inst_hflow": {
+          "type": "decimalv3(10, 4)",
+          "description": "循环水热表_瞬时流量",
+          "constraints": [],
+          "examples": [
+            "407.2"
+          ]
+        },
+        "circulate_water_inst_hheat": {
+          "type": "decimalv3(10, 4)",
+          "description": "循环水热表_瞬时热量",
+          "constraints": [],
+          "examples": [
+            "17.7182"
+          ]
+        },
+        "circulate_water_total_hflow": {
+          "type": "decimalv3(12, 4)",
+          "description": "循环水热表_累计流量",
+          "constraints": [],
+          "examples": [
+            "942597.125"
+          ]
+        },
+        "circulate_water_total_hheat": {
+          "type": "decimalv3(12, 4)",
+          "description": "循环水热表_累计热量",
+          "constraints": [],
+          "examples": [
+            "15903.1416"
+          ]
+        },
+        "intermediary_water_sup_htemp": {
+          "type": "decimalv3(10, 4)",
+          "description": "中介水热表_供水温度",
+          "constraints": [],
+          "examples": [
+            "36.8"
+          ]
+        },
+        "intermediary_water_ret_htemp": {
+          "type": "decimalv3(10, 4)",
+          "description": "中介水热表_回水温度",
+          "constraints": [],
+          "examples": [
+            "29.5"
+          ]
+        },
+        "intermediary_water_inst_hflow": {
+          "type": "decimalv3(10, 4)",
+          "description": "中介水热表_瞬时流量",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "intermediary_water_inst_hheat": {
+          "type": "decimalv3(10, 4)",
+          "description": "中介水热表_瞬时热量",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "intermediary_water_total_hflow": {
+          "type": "decimalv3(12, 4)",
+          "description": "中介水热表_累计流量",
+          "constraints": [],
+          "examples": [
+            "102646"
+          ]
+        },
+        "intermediary_water_total_hheat": {
+          "type": "decimalv3(12, 4)",
+          "description": "中介水热表_累计热量",
+          "constraints": [],
+          "examples": [
+            "3001"
+          ]
+        },
+        "heatpump_total_gas": {
+          "type": "decimalv3(10, 2)",
+          "description": "热泵耗气量",
+          "constraints": [],
+          "examples": [
+            "918179.94"
+          ]
+        },
+        "oil_choke_pressure": {
+          "type": "decimalv3(10, 2)",
+          "description": "阻油器压力",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "heatpump_inst_gas": {
+          "type": "decimalv3(10, 2)",
+          "description": "热泵耗气量瞬时流量",
+          "constraints": [],
+          "examples": [
+            "278.18"
+          ]
+        }
+      },
+      "business_rules": [
+        "主键字段: data_id",
+        "时间相关字段: data_time, data_storage_time"
+      ],
+      "relationships": []
+    },
+    "ods_sc01_ntjt_zhgr_heat_boiler_inst_data": {
+      "table_name": "ods_sc01_ntjt_zhgr_heat_boiler_inst_data",
+      "description": "热源厂锅炉实时数据表",
+      "fields": {
+        "data_time": {
+          "type": "datetime",
+          "description": "采集时间",
+          "constraints": [],
+          "examples": ["2024/9/23 22:06:37"]
+        },
+        "blr_id": {
+          "type": "varchar(10)",
+          "description": "锅炉ID",
+          "constraints": [],
+          "examples": [
+            "2"
+          ]
+        },
+        "data_id": {
+          "type": "bigint(20)",
+          "description": "数据ID自增",
+          "constraints": [],
+          "examples": [
+            "5194332224"
+          ]
+        },
+        "data_storage_time": {
+          "type": "datetime",
+          "description": "Time when the data is loaded",
+          "constraints": [],
+          "examples": ["2024/12/3 16:58:55"]
+        },
+        "blr_sup_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_供水温度",
+          "constraints": [],
+          "examples": [
+            "23.7"
+          ]
+        },
+        "blr_sup_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_供水压力",
+          "constraints": [],
+          "examples": [
+            "0.3424"
+          ]
+        },
+        "blr_ret_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_回水温度",
+          "constraints": [],
+          "examples": [
+            "25.1"
+          ]
+        },
+        "blr_ret_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_回水压力",
+          "constraints": [],
+          "examples": [
+            "0.3469"
+          ]
+        },
+        "blr_inst_flow": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_供水瞬时流量",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_total_hflow": {
+          "type": "decimalv3(12, 4)",
+          "description": "锅炉_供水累计流量",
+          "constraints": [],
+          "examples": [
+            "461961.0938"
+          ]
+        },
+        "blr_inst_heat": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_供水热表瞬热",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_total_heat": {
+          "type": "decimalv3(12, 4)",
+          "description": "锅炉_供水热表累热",
+          "constraints": [],
+          "examples": [
+            "30951.9297"
+          ]
+        },
+        "blr_gas_inst_flow": {
+          "type": "decimalv3(12, 4)",
+          "description": "锅炉_燃气瞬时流量",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_gas_total_hflow": {
+          "type": "decimalv3(12, 4)",
+          "description": "锅炉_燃气累计流量",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_pump_out_smoke_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_省煤气出口_热泵入口烟温",
+          "constraints": [],
+          "examples": [
+            "23"
+          ]
+        },
+        "blr_pump_out_smoke_press": {
+          "type": "decimalv3(12, 4)",
+          "description": "锅炉_省煤气出口_热泵入口烟压",
+          "constraints": [],
+          "examples": [
+            "0.0215"
+          ]
+        },
+        "blr_out_smoke_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_锅炉出口_省煤器入口_烟温",
+          "constraints": [],
+          "examples": [
+            "163.3102"
+          ]
+        },
+        "blr_out_smoke_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_锅炉出口_省煤气入口_烟压",
+          "constraints": [],
+          "examples": [
+            "0.0331"
+          ]
+        },
+        "blr_fan_out_smoke_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_风机_出口烟温",
+          "constraints": [],
+          "examples": [
+            "17.3"
+          ]
+        },
+        "blr_fan_out_smoke_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_风机_出口风压",
+          "constraints": [],
+          "examples": [
+            "0.076"
+          ]
+        },
+        "blr_fan_gas_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_风机_燃气压力",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_fan_elec": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_风机_电流",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_front_container_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_前上集装箱温度",
+          "constraints": [],
+          "examples": [
+            "23.6"
+          ]
+        },
+        "blr_back_container_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_后上集装箱温度",
+          "constraints": [],
+          "examples": [
+            "23.8"
+          ]
+        },
+        "blr_economizer_in_smoke_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_省煤器_进口烟温",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_economizer_in_smoke_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_省煤器_进口烟压",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_economizer_out_smoke_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_省煤器_出口烟温",
+          "constraints": [],
+          "examples": [
+            "23"
+          ]
+        },
+        "blr_economizer_out_smoke_press": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_省煤器_出口烟压",
+          "constraints": [],
+          "examples": [
+            "0.0215"
+          ]
+        },
+        "blr_condenser_out_temp": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_冷凝器_出水温度",
+          "constraints": [],
+          "examples": [
+            "23.3"
+          ]
+        },
+        "blr_so2": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_环保_出口SO2实测值",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "blr_zkso2": {
+          "type": "decimalv3(10, 4)",
+          "description": "锅炉_环保_出口SO2折算值",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        }
+      },
+      "business_rules": [
+        "主键字段: data_id",
+        "时间相关字段: data_time, data_storage_time"
+      ],
+      "relationships": []
+    },
+    "ods_sc01_ntjt_zhgr_heat_instruction_issue_detail": {
+      "table_name": "ods_sc01_ntjt_zhgr_heat_instruction_issue_detail",
+      "description": "供热调控阀门下发指令表",
+      "fields": {
+        "id": {
+          "type": "bigserial",
+          "description": "",
+          "constraints": [],
+          "examples": [
+            "134"
+          ]
+        },
+        "strategy_id": {
+          "type": "int8",
+          "description": "算法推荐策略详情ID",
+          "constraints": [],
+          "examples": [
+            "2749"
+          ]
+        },
+        "strategy_version": {
+          "type": "varchar(14)",
+          "description": "",
+          "constraints": [],
+          "examples": [
+            "20241021184825"
+          ]
+        },
+        "cmd_guid": {
+          "type": "varchar(30)",
+          "description": "与SCADA进行通信的唯一标识",
+          "constraints": [],
+          "examples": ["FK1297994880152240142102001"]
+        },
+        "valve_id": {
+          "type": "varchar(60)",
+          "description": "阀门ID",
+          "constraints": [],
+          "examples": ["涌鑫花苑换热站.JZ1_DDFGD"]
+        },
+        "valve_open_issue": {
+          "type": "numeric(10, 2)",
+          "description": "阀门开度-下发",
+          "constraints": [],
+          "examples": [
+            "24.65"
+          ]
+        },
+        "valve_is_work": {
+          "type": "bpchar(1)",
+          "description": "阀门是否工作（0：未动作，1：已动作）",
+          "constraints": [],
+          "examples": []
+        },
+        "valve_open_issue_inst": {
+          "type": "numeric(10, 2)",
+          "description": "阀门开度-下发后的实际开度",
+          "constraints": [],
+          "examples": []
+        },
+        "valve_open_issue_inst_time": {
+          "type": "timestamp",
+          "description": "阀门开度-下发后的实际开度的时间",
+          "constraints": [],
+          "examples": []
+        },
+        "issue_by": {
+          "type": "int4",
+          "description": "下发人",
+          "constraints": [],
+          "examples": []
+        },
+        "issue_time": {
+          "type": "timestamp",
+          "description": "下发时间",
+          "constraints": [],
+          "examples": ["2024/10/21 18:48:15"]
+        },
+        "issue_json": {
+          "type": "varchar(500)",
+          "description": "下发JSON",
+          "constraints": [],
+          "examples": ["{\"cmdGuid\":\"FK1297994880152240142102001\",\"code\":\"200\",\"msg\":\"校验成功\"}"]
+        },
+        "issue_result": {
+          "type": "bpchar(1)",
+          "description": "下发结果：（0：失败，1：成功）",
+          "constraints": [],
+          "examples": [
+            "1"
+          ]
+        },
+        "issue_result_time": {
+          "type": "timestamp",
+          "description": "下发结果时间",
+          "constraints": [],
+          "examples": ["2024/10/21 18:48:15"]
+        },
+        "issue_result_json": {
+          "type": "varchar(500)",
+          "description": "下发结果json",
+          "constraints": [],
+          "examples": []
+        },
+        "issue_fail_reason": {
+          "type": "varchar(500)",
+          "description": "下发失败的原因",
+          "constraints": [],
+          "examples": ["校验成功"]
+        },
+        "feedback_time": {
+          "type": "timestamp",
+          "description": "反馈时间",
+          "constraints": [],
+          "examples": []
+        },
+        "feedback_result": {
+          "type": "bpchar(1)",
+          "description": "反馈结果：（0：失败，1：成功）",
+          "constraints": [],
+          "examples": [
+            "0"
+          ]
+        },
+        "feedback_json": {
+          "type": "varchar(500)",
+          "description": "反馈JSON",
+          "constraints": [],
+          "examples": []
+        },
+        "create_by": {
+          "type": "int4",
+          "description": "",
+          "constraints": [],
+          "examples": []
+        },
+        "create_time": {
+          "type": "timestamp",
+          "description": "",
+          "constraints": [],
+          "examples": ["2024/10/21 18:42:48"]
+        },
+        "update_by": {
+          "type": "int4",
+          "description": "",
+          "constraints": [],
+          "examples": []
+        },
+        "update_time": {
+          "type": "timestamp",
+          "description": "",
+          "constraints": [],
+          "examples": []
+        },
+        "remark": {
+          "type": "varchar(500)",
+          "description": "",
+          "constraints": [],
+          "examples": []
+        },
+        "stn_busi_id": {
+          "type": "int4",
+          "description": "换热站ID",
+          "constraints": [],
+          "examples": [
+            "1020"
+          ]
+        },
+        "plant_busi_id": {
+          "type": "int4",
+          "description": "",
+          "constraints": [],
+          "examples": [
+            "102001"
+          ]
+        },
+        "send_id": {
+          "type": "int4",
+          "description": "",
+          "constraints": [],
+          "examples": [
+            "8"
+          ]
+        }
+      },
+      "business_rules": [
+        "主键字段: id",
+        "时间相关字段: valve_open_issue_inst_time, issue_time, issue_result_time, feedback_time, create_time, update_by, update_time"
+      ],
+      "relationships": []
+    }
+  }
+}

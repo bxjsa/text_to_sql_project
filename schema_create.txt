@@ -1,0 +1,534 @@
+###下面仅展示了8张数据表的SQL创建语句，数据插入过于冗余，且不具有参考价值，因此未展示。
+
+USE heating_meta;
+
+-- 创建换热站实时数据表
+CREATE TABLE ods_sc01_ntjt_zhgr_heat_station_inst_data (
+    -- 主键和标识字段
+    stn_id INT NOT NULL COMMENT '站点ID',
+    data_id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '数据ID自增',
+    
+    -- 时间字段
+    data_time DATETIME NOT NULL COMMENT '数据时间',
+    data_storage_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '加载数据的时间',
+    
+    -- 一次网相关字段
+    stn_prim_sup_temp DECIMAL(10,4) NULL COMMENT '一次网供水温度(30-100°C)',
+    stn_prim_ret_temp DECIMAL(10,4) NULL COMMENT '一次网回水温度(20-90°C)',
+    stn_prim_sup_bdirt_press DECIMAL(10,4) NULL COMMENT '一次网供水污前压力(0.01-1 MPa)',
+    stn_prim_sup_adirt_press DECIMAL(10,4) NULL COMMENT '一次网供水污后压力',
+    stn_prim_ret_press DECIMAL(10,4) NULL COMMENT '一次网回水压力(0.01-1 MPa)',
+    stn_prim_sup_htemp DECIMAL(10,4) NULL COMMENT '一次网热表供水温度(30-100°C)',
+    stn_prim_ret_htemp DECIMAL(10,4) NULL COMMENT '一次网热表回水温度(20-90°C)',
+    stn_prim_inst_hflow DECIMAL(10,4) NULL COMMENT '一次网热表瞬时流量(1-500 m³/h)',
+    stn_prim_total_hflow DECIMAL(15,4) NULL COMMENT '一次网热表累计流量',
+    stn_prim_inst_hheat DECIMAL(10,4) NULL COMMENT '一次网热表瞬时热量(1-50 GJ/h)',
+    stn_prim_total_hheat DECIMAL(15,4) NULL COMMENT '一次网热表累计热量',
+    
+    -- 新能源相关字段
+    stn_eney_sup_temp DECIMAL(10,4) NULL COMMENT '新能源供水温度',
+    stn_eney_ret_temp DECIMAL(10,4) NULL COMMENT '新能源回水温度',
+    stn_eney_sup_bdirt_press DECIMAL(10,4) NULL COMMENT '新能源供水污前压力',
+    stn_eney_sup_adirt_press DECIMAL(10,4) NULL COMMENT '新能源供水污后压力',
+    stn_eney_ret_press DECIMAL(10,4) NULL COMMENT '新能源回水压力',
+    stn_eney_sup_htemp DECIMAL(10,4) NULL COMMENT '新能源热表供水温度',
+    stn_eney_ret_htemp DECIMAL(10,4) NULL COMMENT '新能源热表回水温度',
+    stn_eney_inst_hflow DECIMAL(10,4) NULL COMMENT '新能源热表瞬时流量',
+    stn_eney_total_hflow DECIMAL(15,4) NULL COMMENT '新能源热表累计流量',
+    stn_eney_inst_hheat DECIMAL(10,4) NULL COMMENT '新能源热表瞬时热量',
+    stn_eney_total_hheat DECIMAL(15,4) NULL COMMENT '新能源热表累计热量',
+    
+    -- 用电相关字段
+    stn_inst_elec DECIMAL(15,4) NULL COMMENT '瞬时用电功率',
+    stn_total_elec DECIMAL(15,4) NULL COMMENT '累计用电电度',
+    
+    -- 机组1相关字段
+    plant1_id BIGINT NULL COMMENT '机组1ID',
+    stn1_set_elec_valve_open DECIMAL(10,4) NULL COMMENT '电动调节阀给定开度1(0-100%)',
+    stn1_inst_elec_valve_open DECIMAL(10,4) NULL COMMENT '电动调节阀实际开度1(0-100%)',
+    stn1_seco_sup_temp DECIMAL(10,4) NULL COMMENT '二次网供水温度1(30-80°C)',
+    stn1_seco_ret_temp DECIMAL(10,4) NULL COMMENT '二次网回水温度1(20-70°C)',
+    stn1_seco_sup_press DECIMAL(10,4) NULL COMMENT '二次网供水压力1(0.01-1 MPa)',
+    stn1_seco_ret_bdirt_press DECIMAL(10,4) NULL COMMENT '二次网回水污前压力1(0.01-1 MPa)',
+    stn1_seco_ret_adirt_press DECIMAL(10,4) NULL COMMENT '二次网回水污后压力1',
+    stn1_seco_sup_htemp DECIMAL(10,4) NULL COMMENT '二次网热表供水温度1(30-80°C)',
+    stn1_seco_ret_htemp DECIMAL(10,4) NULL COMMENT '二次网热表回水温度1(20-70°C)',
+    stn1_seco_inst_hflow DECIMAL(10,4) NULL COMMENT '二次网热表瞬时流量1(1-500 m³/h)',
+    stn1_seco_total_hflow DECIMAL(15,4) NULL COMMENT '二次网热表累计流量1',
+    stn1_seco_inst_hheat DECIMAL(10,4) NULL COMMENT '二次网热表瞬时热量1(1-50 GJ/h)',
+    stn1_seco_total_hheat DECIMAL(15,4) NULL COMMENT '二次网热表累计热量1',
+    stn1_seco_repl_inst_flow DECIMAL(10,4) NULL COMMENT '补水瞬时流量1',
+    stn1_seco_repl_total_flow DECIMAL(15,4) NULL COMMENT '补水累计流量1',
+    
+    -- 机组2相关字段
+    plant2_id BIGINT NULL COMMENT '机组2ID',
+    stn2_set_elec_valve_open DECIMAL(10,4) NULL COMMENT '电动调节阀给定开度2(0-100%)',
+    stn2_inst_elec_valve_open DECIMAL(10,4) NULL COMMENT '电动调节阀实际开度2(0-100%)',
+    stn2_seco_sup_temp DECIMAL(10,4) NULL COMMENT '二次网供水温度2(30-80°C)',
+    stn2_seco_ret_temp DECIMAL(10,4) NULL COMMENT '二次网回水温度2(20-70°C)',
+    stn2_seco_sup_press DECIMAL(10,4) NULL COMMENT '二次网供水压力2(0.01-1 MPa)',
+    stn2_seco_ret_bdirt_press DECIMAL(10,4) NULL COMMENT '二次网回水污前压力2(0.01-1 MPa)',
+    stn2_seco_ret_adirt_press DECIMAL(10,4) NULL COMMENT '二次网回水污后压力2',
+    stn2_seco_sup_htemp DECIMAL(10,4) NULL COMMENT '二次网热表供水温度2(30-80°C)',
+    stn2_seco_ret_htemp DECIMAL(10,4) NULL COMMENT '二次网热表回水温度2(20-70°C)',
+    stn2_seco_inst_hflow DECIMAL(10,4) NULL COMMENT '二次网热表瞬时流量2(1-500 m³/h)',
+    stn2_seco_total_hflow DECIMAL(15,4) NULL COMMENT '二次网热表累计流量2',
+    stn2_seco_inst_hheat DECIMAL(10,4) NULL COMMENT '二次网热表瞬时热量2(1-50 GJ/h)',
+    stn2_seco_total_hheat DECIMAL(15,4) NULL COMMENT '二次网热表累计热量2',
+    stn2_seco_repl_inst_flow DECIMAL(10,4) NULL COMMENT '补水瞬时流量2',
+    stn2_seco_repl_total_flow DECIMAL(15,4) NULL COMMENT '补水累计流量2',
+    
+    -- 机组3相关字段
+    plant3_id BIGINT NULL COMMENT '机组3ID',
+    stn3_set_elec_valve_open DECIMAL(10,4) NULL COMMENT '电动调节阀给定开度3(0-100%)',
+    stn3_inst_elec_valve_open DECIMAL(10,4) NULL COMMENT '电动调节阀实际开度3(0-100%)',
+    stn3_seco_sup_temp DECIMAL(10,4) NULL COMMENT '二次网供水温度3(30-80°C)',
+    stn3_seco_ret_temp DECIMAL(10,4) NULL COMMENT '二次网回水温度3(20-70°C)',
+    stn3_seco_sup_press DECIMAL(10,4) NULL COMMENT '二次网供水压力3(0.01-1 MPa)',
+    stn3_seco_ret_bdirt_press DECIMAL(10,4) NULL COMMENT '二次网回水污前压力3(0.01-1 MPa)',
+    stn3_seco_ret_adirt_press DECIMAL(10,4) NULL COMMENT '二次网回水污后压力3',
+    stn3_seco_sup_htemp DECIMAL(10,4) NULL COMMENT '二次网热表供水温度3(30-80°C)',
+    stn3_seco_ret_htemp DECIMAL(10,4) NULL COMMENT '二次网热表回水温度3(20-70°C)',
+    stn3_seco_inst_hflow DECIMAL(10,4) NULL COMMENT '二次网热表瞬时流量3(1-500 m³/h)',
+    stn3_seco_total_hflow DECIMAL(15,4) NULL COMMENT '二次网热表累计流量3',
+    stn3_seco_inst_hheat DECIMAL(10,4) NULL COMMENT '二次网热表瞬时热量3(1-50 GJ/h)',
+    stn3_seco_total_hheat DECIMAL(15,4) NULL COMMENT '二次网热表累计热量3',
+    stn3_seco_repl_inst_flow DECIMAL(10,4) NULL COMMENT '补水瞬时流量3',
+    stn3_seco_repl_total_flow DECIMAL(15,4) NULL COMMENT '补水累计流量3',
+    
+    -- 索引
+    INDEX idx_stn_id (stn_id),
+    INDEX idx_data_time (data_time),
+    INDEX idx_stn_data_time (stn_id, data_time)
+) ENGINE=InnoDB 
+  DEFAULT CHARSET=utf8mb4 
+  COLLATE=utf8mb4_general_ci 
+  COMMENT='换热站实时数据表';
+
+USE heating_meta;
+
+-- 创建换热站业务信息表
+CREATE TABLE ods_sc01_ntjt_zhgr_heat_station_info (
+    -- 主键和标识字段
+    id INTEGER AUTO_INCREMENT PRIMARY KEY COMMENT '自增整数类型，用于唯一标识记录',
+    stn_id INTEGER NULL COMMENT '实时表中对应的换热站id',
+    heatstation_code VARCHAR(50) NULL COMMENT 'ERP中换热站唯一编码',
+    
+    -- 基本信息字段
+    stn_name VARCHAR(200) NULL COMMENT '换热站名称',
+    stn_state CHAR(1) NULL COMMENT '换热站状态（0：在运，1：停运，2：维修）',
+    plan_num INTEGER NULL COMMENT '机组数量',
+    heat_method CHAR(1) NULL COMMENT '采暖方式(0:地暖/1:挂暖/2:中央空调/3:挂暖+中央空调)',
+    build_type CHAR(1) NULL COMMENT '站点性质(0:居民/1:公建/2:医院/3:学校/4:工业)',
+    site_type CHAR(1) NULL COMMENT '站点类型（0：监控站，1：人工站，2：自管站）',
+    source_type CHAR(1) NULL COMMENT '热源形式(0:地热井/风冷螺杆机/1:空气源热泵/2:燃气锅炉/3:燃空气源热泵/4:水网/5:基汽/6:综合能源)',
+    energy_save_type CHAR(1) NULL COMMENT '节能类型(0:非节能/1:一步节能/2:二步节能/3:三步节能/4:四步节能)',
+    
+    -- 面积相关字段
+    heat_area NUMERIC(15,2) NULL COMMENT '供热面积（默认）',
+    mesh_area NUMERIC(15,2) NULL COMMENT '入网面积(建筑面积)',
+    trans_area NUMERIC(15,2) NULL COMMENT '传热面积',
+    actual_area NUMERIC(15,2) NULL COMMENT '实际供暖面积',
+    
+    -- 时间字段
+    state_time TIMESTAMP NULL COMMENT '状态变更时间',
+    build_time TIMESTAMP NULL COMMENT '建设时间',
+    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    update_time TIMESTAMP NULL COMMENT '更新时间',
+    
+    -- 位置和联系信息
+    longitude NUMERIC(10,6) NULL COMMENT '经度',
+    latitude NUMERIC(10,6) NULL COMMENT '纬度',
+    distance NUMERIC(15,2) NULL COMMENT '距离（拓扑距离）真实管网距离',
+    site_addr VARCHAR(500) NULL COMMENT '热站地址',
+    belong_unit VARCHAR(200) NULL COMMENT '所属单位',
+    charge_person VARCHAR(100) NULL COMMENT '负责人',
+    contact_info VARCHAR(100) NULL COMMENT '联系人',
+    
+    -- 设备数量
+    source_num INTEGER NULL COMMENT '热源数量',
+    valve_num INTEGER NULL COMMENT '阀门数量',
+    
+    -- 系统字段
+    create_by VARCHAR(100) NULL COMMENT '创建人',
+    update_by VARCHAR(100) NULL COMMENT '更新人',
+    is_delete CHAR(1) DEFAULT '0' COMMENT '0：未删除 1：已删除',
+    remark VARCHAR(500) NULL COMMENT '备注',
+    serial_num INTEGER NULL COMMENT '站点排序',
+    
+    -- 索引
+    INDEX idx_stn_id (stn_id),
+    INDEX idx_heatstation_code (heatstation_code),
+    INDEX idx_stn_state (stn_state),
+    INDEX idx_belong_unit (belong_unit)
+) ENGINE=InnoDB 
+  DEFAULT CHARSET=utf8mb4 
+  COLLATE=utf8mb4_general_ci 
+  COMMENT='换热站业务信息表';
+
+
+USE heating_meta;
+
+-- 创建热源实时数据表
+CREATE TABLE ods_sc01_ntjt_zhgr_heat_source_inst_data (
+    -- 主键和标识字段
+    data_id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '数据ID自增',
+    src_id INT NULL COMMENT '热源ID',
+    
+    -- 时间字段
+    data_time DATETIME NULL COMMENT '采集时间',
+    data_storage_time DATETIME NULL COMMENT '落库时间',
+    
+    -- 用水相关
+    src_repl_inst_flow DECIMAL(15,4) NULL COMMENT '瞬时用水量',
+    src_repl_total_flow DECIMAL(20,4) NULL COMMENT '累计用水量',
+    
+    -- 用电相关
+    src_inst_elec DECIMAL(15,4) NULL COMMENT '瞬时电功率',
+    src_total_elec DECIMAL(20,4) NULL COMMENT '累计用电量',
+    
+    -- 运行参数
+    src_run_load DECIMAL(15,4) NULL COMMENT '运行负荷',
+    
+    -- 供水参数
+    src_sup_temp DECIMAL(10,2) NULL COMMENT '供水温度(正常范围40-120℃)',
+    src_sup_press DECIMAL(10,4) NULL COMMENT '供水压力(正常范围0.01-1MPa)',
+    
+    -- 供水热表参数
+    src_sup_sup_htemp DECIMAL(10,2) NULL COMMENT '供水热表供温(正常范围40-120℃)',
+    src_sup_ret_htemp DECIMAL(10,2) NULL COMMENT '供水热表回温(正常范围30-100℃)',
+    src_sup_inst_hflow DECIMAL(15,4) NULL COMMENT '热表供水瞬时流量(正常范围1-3500)',
+    src_sup_total_hflow DECIMAL(20,4) NULL COMMENT '热表供水累计流量',
+    src_sup_inst_hheat DECIMAL(15,4) NULL COMMENT '热表供水瞬时热量(正常范围1-600)',
+    src_sup_total_hheat DECIMAL(20,4) NULL COMMENT '热表供水累计热量',
+    
+    -- 回水参数
+    src_ret_temp DECIMAL(10,2) NULL COMMENT '回水温度(正常范围30-100℃)',
+    src_ret_press DECIMAL(10,4) NULL COMMENT '回水压力(正常范围0.01-1MPa)',
+    
+    -- 回水热表参数
+    src_ret_sup_htemp DECIMAL(10,2) NULL COMMENT '回水热表供温',
+    src_ret_ret_htemp DECIMAL(10,2) NULL COMMENT '回水热表回温',
+    src_ret_inst_hflow DECIMAL(15,4) NULL COMMENT '回水瞬时流量',
+    src_ret_total_hflow DECIMAL(20,4) NULL COMMENT '回水累计流量',
+    src_ret_inst_hheat DECIMAL(15,4) NULL COMMENT '回水瞬时热量',
+    src_ret_total_hheat DECIMAL(20,4) NULL COMMENT '回水累计热量',
+    
+    -- 阀门控制
+    src_ret_set_elec_valve_open DECIMAL(10,2) NULL COMMENT '回水阀门设定开度',
+    src_ret_inst_elec_valve_open DECIMAL(10,2) NULL COMMENT '回水阀门实际开度',
+    
+    -- 索引
+    INDEX idx_src_id (src_id),
+    INDEX idx_data_time (data_time),
+    INDEX idx_src_id_time (src_id, data_time)
+) ENGINE=InnoDB 
+  DEFAULT CHARSET=utf8mb4 
+  COLLATE=utf8mb4_general_ci 
+  COMMENT='热源实时数据表';
+
+USE heating_meta;
+
+-- 创建商河县历史天气数据表
+CREATE TABLE ods_sc01_ntjt_zhgr_heat_weather_info_log (
+    -- 主键和标识字段
+    data_id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '数据ID自增',
+    data_time DATETIME NULL COMMENT '时间',
+    
+    -- 温度相关
+    temp DECIMAL(10,2) NULL COMMENT '气温(℃)',
+    
+    -- 太阳辐射
+    solar DECIMAL(15,2) NULL COMMENT '太阳辐射(W/m²)',
+    
+    -- 地理位置
+    longitude DECIMAL(12,6) NULL COMMENT '经度',
+    latitude DECIMAL(12,6) NULL COMMENT '纬度',
+    altitude DECIMAL(10,2) NULL COMMENT '海拔(米)',
+    
+    -- 湿度相关
+    rh DECIMAL(10,2) NULL COMMENT '相对湿度(%)',
+    rh_max DECIMAL(10,2) NULL COMMENT '最大相对湿度(%)',
+    rh_min DECIMAL(10,2) NULL COMMENT '最小相对湿度(%)',
+    
+    -- 风力相关
+    wind_dir DECIMAL(10,2) NULL COMMENT '风向(度)',
+    wind_speed DECIMAL(10,2) NULL COMMENT '风速(m/s)',
+    
+    -- 气压
+    air_pressure DECIMAL(10,2) NULL COMMENT '气压(hPa)',
+    
+    -- 降水
+    rain DECIMAL(10,2) NULL COMMENT '降水量(mm)',
+    
+    -- 云量
+    cloudiness_all DECIMAL(10,2) NULL COMMENT '总云量(%)',
+    cloudiness_low DECIMAL(10,2) NULL COMMENT '低云量(%)',
+    
+    -- 天气现象
+    weather_code INT NULL COMMENT '天气现象代码(0:晴,1:多云,2:阴,7:小雨)',
+    weather_desc VARCHAR(50) NULL COMMENT '天气现象描述(0:晴,1:多云,2:阴,7:小雨)',
+    
+    -- 索引
+    INDEX idx_data_time (data_time),
+    INDEX idx_weather_code (weather_code),
+    INDEX idx_time_weather (data_time, weather_code)
+) ENGINE=InnoDB 
+  DEFAULT CHARSET=utf8mb4 
+  COLLATE=utf8mb4_general_ci 
+  COMMENT='商河县历史天气数据表。包含商河地区每日每小时的天气情况。';
+
+USE heating_meta;
+
+-- 创建供热热源厂信息表
+CREATE TABLE ods_sc01_ntjt_zhgr_heat_source_info (
+    -- 主键
+    id INT AUTO_INCREMENT PRIMARY KEY COMMENT '数据主键ID自增',
+    
+    -- 热源基本信息
+    src_name VARCHAR(100) NULL COMMENT '热源名称',
+    src_id INT NULL COMMENT '实时数据表中的热源ID',
+    src_type CHAR(1) NULL COMMENT '热源类型(0：燃煤锅炉1：燃气锅炉2：电锅炉3：热电联产4：能源站)',
+    src_state CHAR(1) NULL COMMENT '热源状态(0：在运，1：停运，2：维修)',
+    state_time TIMESTAMP NULL COMMENT '状态变更时间',
+    build_time TIMESTAMP NULL COMMENT '建设时间',
+    
+    -- 供热能力相关
+    heat_area DECIMAL(15,2) NULL COMMENT '供热面积(平方米)',
+    mesh_area DECIMAL(15,2) NULL COMMENT '入网面积(平方米)',
+    design_heat DECIMAL(15,2) NULL COMMENT '设计供热能力(MW)',
+    actual_heat DECIMAL(15,2) NULL COMMENT '实际供热能力(MW)',
+    heat_price DECIMAL(10,2) NULL COMMENT '热单价(元/平方米)',
+    
+    -- 单位及联系信息
+    belong_unit VARCHAR(200) NULL COMMENT '所属单位',
+    charge_person VARCHAR(50) NULL COMMENT '负责人',
+    contact_info VARCHAR(100) NULL COMMENT '联系人电话',
+    site_addr VARCHAR(200) NULL COMMENT '地址',
+    
+    -- 地理位置
+    longitude DECIMAL(12,6) NULL COMMENT '经度',
+    latitude DECIMAL(12,6) NULL COMMENT '纬度',
+    
+    -- 负荷系数
+    load_coefficient DECIMAL(10,4) NULL COMMENT '负荷预测修正系数',
+    
+    -- 数据管理字段
+    create_by VARCHAR(50) NULL COMMENT '信息创建人',
+    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '信息创建时间',
+    update_by VARCHAR(50) NULL COMMENT '信息更新人',
+    update_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息更新时间',
+    is_delete CHAR(1) NULL DEFAULT '0' COMMENT '是否删除(0：未删除, 1：已删除)',
+    remark VARCHAR(500) NULL COMMENT '备注',
+    
+    -- 索引
+    INDEX idx_src_id (src_id),
+    INDEX idx_src_type (src_type),
+    INDEX idx_src_state (src_state),
+    INDEX idx_is_delete (is_delete)
+) ENGINE=InnoDB 
+  DEFAULT CHARSET=utf8mb4 
+  COLLATE=utf8mb4_general_ci 
+  COMMENT='供热热源厂信息表。信息为商河热源厂的相关信息。';
+
+
+USE heating_meta;
+
+-- 创建热源厂热泵实时数据表
+CREATE TABLE ods_sc01_ntjt_zhgr_heat_heatpump_inst_data (
+    -- 主键和标识字段
+    data_id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '数据ID自增',
+    data_time DATETIME NULL COMMENT '采集时间',
+    pump_id VARCHAR(10) NULL COMMENT 'ID',
+    data_storage_time DATETIME NULL COMMENT 'Time when the data is loaded',
+    
+    -- 发生器相关
+    generator_smoke_out_temp DECIMAL(10,4) NULL COMMENT '发生器_烟气出口温度(℃)',
+    generator_gas_in_temp DECIMAL(10,4) NULL COMMENT '发生器_燃气入口压力(MPa)',
+    generator_gas_in_elec_valve_open DECIMAL(10,4) NULL COMMENT '发生器_燃气入口阀门开度(%)',
+    
+    -- 溶液板换相关
+    solution_in_temp DECIMAL(10,4) NULL COMMENT '溶液板换_入口温度(℃)',
+    solution_out_temp DECIMAL(10,4) NULL COMMENT '溶液板换_出口温度(℃)',
+    
+    -- 溶液泵频率
+    dilute_solution_set_frequency DECIMAL(10,4) NULL COMMENT '稀溶液泵_频率给定(Hz)',
+    concentrated_solution_set_frequency DECIMAL(10,4) NULL COMMENT '浓溶液泵_频率给定(Hz)',
+    
+    -- 冷凝器和蒸发器
+    condenser_temp DECIMAL(10,4) NULL COMMENT '冷凝器_冷凝温度(℃)',
+    evaporator_temp DECIMAL(10,4) NULL COMMENT '蒸发器_蒸发温度(℃)',
+    
+    -- 冷剂泵
+    refrigerant_pump_set_frequency DECIMAL(10,4) NULL COMMENT '冷剂泵_频率给定(Hz)',
+    
+    -- 热网水参数
+    heat_network_in_temp DECIMAL(10,4) NULL COMMENT '热网水入口温度(℃)',
+    heat_network_in_press DECIMAL(10,4) NULL COMMENT '热网水入口压力(MPa)',
+    heat_network_out_temp DECIMAL(10,4) NULL COMMENT '热网水出口温度(℃)',
+    heat_network_out_press DECIMAL(10,4) NULL COMMENT '热网水出口压力(MPa)',
+    
+    -- 喷淋水参数
+    spray_water_out_temp DECIMAL(10,4) NULL COMMENT '喷淋水出口温度(℃)',
+    spray_water_out_press DECIMAL(10,4) NULL COMMENT '喷淋水出口压力(MPa)',
+    
+    -- 循环水热表参数
+    circulate_water_sup_htemp DECIMAL(10,4) NULL COMMENT '循环水热表_供水温度(℃)',
+    circulate_water_ret_htemp DECIMAL(10,4) NULL COMMENT '循环水热表_回水温度(℃)',
+    circulate_water_inst_hflow DECIMAL(10,4) NULL COMMENT '循环水热表_瞬时流量(m³/h)',
+    circulate_water_inst_hheat DECIMAL(10,4) NULL COMMENT '循环水热表_瞬时热量(GJ/h)',
+    circulate_water_total_hflow DECIMAL(12,4) NULL COMMENT '循环水热表_累计流量(m³)',
+    circulate_water_total_hheat DECIMAL(12,4) NULL COMMENT '循环水热表_累计热量(GJ)',
+    
+    -- 中介水热表参数
+    intermediary_water_sup_htemp DECIMAL(10,4) NULL COMMENT '中介水热表_供水温度(℃)',
+    intermediary_water_ret_htemp DECIMAL(10,4) NULL COMMENT '中介水热表_回水温度(℃)',
+    intermediary_water_inst_hflow DECIMAL(10,4) NULL COMMENT '中介水热表_瞬时流量(m³/h)',
+    intermediary_water_inst_hheat DECIMAL(10,4) NULL COMMENT '中介水热表_瞬时热量(GJ/h)',
+    intermediary_water_total_hflow DECIMAL(12,4) NULL COMMENT '中介水热表_累计流量(m³)',
+    intermediary_water_total_hheat DECIMAL(12,4) NULL COMMENT '中介水热表_累计热量(GJ)',
+    
+    -- 燃气消耗参数
+    heatpump_total_gas DECIMAL(10,2) NULL COMMENT '热泵耗气量(m³)',
+    oil_choke_pressure DECIMAL(10,2) NULL COMMENT '阻油器压力(kPa)',
+    heatpump_inst_gas DECIMAL(10,2) NULL COMMENT '热泵耗气量瞬时流量(m³/h)',
+    
+    -- 索引
+    INDEX idx_data_time (data_time),
+    INDEX idx_pump_id (pump_id),
+    INDEX idx_pump_time (pump_id, data_time),
+    INDEX idx_storage_time (data_storage_time)
+) ENGINE=InnoDB 
+  DEFAULT CHARSET=utf8mb4 
+  COLLATE=utf8mb4_general_ci 
+  COMMENT='热源厂热泵实时数据表。';
+
+
+USE heating_meta;
+
+-- 创建热源厂锅炉实时数据表
+CREATE TABLE ods_sc01_ntjt_zhgr_heat_boiler_inst_data (
+    -- 主键和标识字段
+    data_id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '数据ID自增',
+    data_time DATETIME NULL COMMENT '采集时间',
+    blr_id VARCHAR(10) NULL COMMENT '锅炉ID',
+    data_storage_time DATETIME NULL COMMENT 'Time when the data is loaded',
+    
+    -- 锅炉供回水参数
+    blr_sup_temp DECIMAL(10,4) NULL COMMENT '锅炉_供水温度(℃)',
+    blr_sup_press DECIMAL(10,4) NULL COMMENT '锅炉_供水压力(MPa)',
+    blr_ret_temp DECIMAL(10,4) NULL COMMENT '锅炉_回水温度(℃)',
+    blr_ret_press DECIMAL(10,4) NULL COMMENT '锅炉_回水压力(MPa)',
+    
+    -- 锅炉流量和热量参数
+    blr_inst_flow DECIMAL(10,4) NULL COMMENT '锅炉_供水瞬时流量(m³/h)',
+    blr_total_hflow DECIMAL(12,4) NULL COMMENT '锅炉_供水累计流量(m³)',
+    blr_inst_heat DECIMAL(10,4) NULL COMMENT '锅炉_供水热表瞬热(GJ/h)',
+    blr_total_heat DECIMAL(12,4) NULL COMMENT '锅炉_供水热表累热(GJ)',
+    
+    -- 燃气参数
+    blr_gas_inst_flow DECIMAL(12,4) NULL COMMENT '锅炉_燃气瞬时流量(m³/h)',
+    blr_gas_total_hflow DECIMAL(12,4) NULL COMMENT '锅炉_燃气累计流量(m³)',
+    
+    -- 省煤器出口/热泵入口烟气参数
+    blr_pump_out_smoke_temp DECIMAL(10,4) NULL COMMENT '锅炉_省煤气出口_热泵入口烟温(℃)',
+    blr_pump_out_smoke_press DECIMAL(12,4) NULL COMMENT '锅炉_省煤气出口_热泵入口烟压(kPa)',
+    
+    -- 锅炉出口/省煤器入口烟气参数
+    blr_out_smoke_temp DECIMAL(10,4) NULL COMMENT '锅炉_锅炉出口_省煤器入口_烟温(℃)',
+    blr_out_smoke_press DECIMAL(10,4) NULL COMMENT '锅炉_锅炉出口_省煤气入口_烟压(kPa)',
+    
+    -- 风机参数
+    blr_fan_out_smoke_temp DECIMAL(10,4) NULL COMMENT '锅炉_风机_出口烟温(℃)',
+    blr_fan_out_smoke_press DECIMAL(10,4) NULL COMMENT '锅炉_风机_出口风压(kPa)',
+    blr_fan_gas_press DECIMAL(10,4) NULL COMMENT '锅炉_风机_燃气压力(kPa)',
+    blr_fan_elec DECIMAL(10,4) NULL COMMENT '锅炉_风机_电流(A)',
+    
+    -- 集装箱温度
+    blr_front_container_temp DECIMAL(10,4) NULL COMMENT '锅炉_前上集装箱温度(℃)',
+    blr_back_container_temp DECIMAL(10,4) NULL COMMENT '锅炉_后上集装箱温度(℃)',
+    
+    -- 省煤器烟气参数
+    blr_economizer_in_smoke_temp DECIMAL(10,4) NULL COMMENT '锅炉_省煤器_进口烟温(℃)',
+    blr_economizer_in_smoke_press DECIMAL(10,4) NULL COMMENT '锅炉_省煤器_进口烟压(kPa)',
+    blr_economizer_out_smoke_temp DECIMAL(10,4) NULL COMMENT '锅炉_省煤器_出口烟温(℃)',
+    blr_economizer_out_smoke_press DECIMAL(10,4) NULL COMMENT '锅炉_省煤器_出口烟压(kPa)',
+    
+    -- 冷凝器参数
+    blr_condenser_out_temp DECIMAL(10,4) NULL COMMENT '锅炉_冷凝器_出水温度(℃)',
+    
+    -- 环保参数
+    blr_so2 DECIMAL(10,4) NULL COMMENT '锅炉_环保_出口SO2(mg/m³)',
+    blr_zkso2 DECIMAL(10,4) NULL COMMENT '锅炉_环保_出口SO2折算值(mg/m³)',
+    
+    -- 索引
+    INDEX idx_data_time (data_time),
+    INDEX idx_blr_id (blr_id),
+    INDEX idx_blr_time (blr_id, data_time),
+    INDEX idx_storage_time (data_storage_time)
+) ENGINE=InnoDB 
+  DEFAULT CHARSET=utf8mb4 
+  COLLATE=utf8mb4_general_ci 
+  COMMENT='热源厂锅炉实时数据表。';
+
+
+USE heating_meta;
+
+-- 创建供热调控阀门下发指令表
+CREATE TABLE ods_sc01_ntjt_zhgr_heat_instruction_issue_detail (
+    -- 主键和标识字段
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '主键ID',
+    strategy_id BIGINT NULL COMMENT '算法推荐策略详情ID',
+    strategy_version VARCHAR(14) NULL COMMENT '策略版本号',
+    cmd_guid VARCHAR(30) NULL COMMENT '与SCADA进行通信的唯一标识',
+    
+    -- 阀门相关字段
+    valve_id VARCHAR(60) NULL COMMENT '阀门ID',
+    valve_open_issue DECIMAL(10,2) NULL COMMENT '阀门开度-下发(%)',
+    valve_is_work CHAR(1) NULL COMMENT '阀门是否工作（0：未动作，1：已动作）',
+    valve_open_issue_inst DECIMAL(10,2) NULL COMMENT '阀门开度-下发后的实际开度(%)',
+    valve_open_issue_inst_time DATETIME NULL COMMENT '阀门开度-下发后的实际开度的时间',
+    
+    -- 下发相关字段
+    issue_by INT NULL COMMENT '下发人ID',
+    issue_time DATETIME NULL COMMENT '下发时间',
+    issue_json VARCHAR(500) NULL COMMENT '下发JSON',
+    issue_result CHAR(1) NULL COMMENT '下发结果：（0：失败，1：成功）',
+    issue_result_time DATETIME NULL COMMENT '下发结果时间',
+    issue_result_json VARCHAR(500) NULL COMMENT '下发结果JSON',
+    issue_fail_reason VARCHAR(500) NULL COMMENT '下发失败的原因',
+    
+    -- 反馈相关字段
+    feedback_time DATETIME NULL COMMENT '反馈时间',
+    feedback_result CHAR(1) NULL COMMENT '反馈结果：（0：失败，1：成功）',
+    feedback_json VARCHAR(500) NULL COMMENT '反馈JSON',
+    
+    -- 业务字段
+    stn_busi_id INT NULL COMMENT '换热站业务ID',
+    plant_busi_id INT NULL COMMENT '热源厂业务ID',
+    send_id INT NULL COMMENT '发送ID',
+    
+    -- 审计字段
+    create_by INT NULL COMMENT '创建人',
+    create_time DATETIME NULL COMMENT '创建时间',
+    update_by INT NULL COMMENT '更新人',
+    update_time DATETIME NULL COMMENT '更新时间',
+    remark VARCHAR(500) NULL COMMENT '备注',
+    
+    -- 索引
+    INDEX idx_strategy_id (strategy_id),
+    INDEX idx_cmd_guid (cmd_guid),
+    INDEX idx_valve_id (valve_id),
+    INDEX idx_issue_time (issue_time),
+    INDEX idx_strategy_version (strategy_version),
+    INDEX idx_stn_busi_id (stn_busi_id),
+    INDEX idx_plant_busi_id (plant_busi_id),
+    INDEX idx_issue_result (issue_result),
+    INDEX idx_feedback_result (feedback_result)
+) ENGINE=InnoDB 
+  DEFAULT CHARSET=utf8mb4 
+  COLLATE=utf8mb4_general_ci 
+  COMMENT='供热调控阀门下发指令表';
+
+
+

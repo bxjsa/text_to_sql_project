@@ -69,21 +69,22 @@ pip install -r requirements.txt
 python /test/1_xxx.py
 ```
 ## 📂 项目结构
-Plaintext
 
+```text
 ├── data/               # M-Schema 定义与预处理后的 JSON 数据
 ├── data_process/       # 数据预处理模块 (可忽略)
 ├── results/            # 日志文件和提交结果
 ├── test/               # 主程序入口
 ├── utils/              # 核心代码模块，含有config.py
-└── requirements.txt
-
+└── requirements.txt    # 项目依赖
+```
 ## 🤝 贡献与致谢
 感谢 Magic AI 团队成员的共同努力。 参考方案：DeepSeek-V2 , MCS-SQL.
-@bxjsa
-@eoni0927-lab
-@sddcksdj
-@noname-h
+主要贡献者
+* @bxjsa
+* @eoni0927-lab
+* @sddcksdj
+* @noname-h
 
 ## 📜 License
 本项目采用 [MIT License](LICENSE) 开源。

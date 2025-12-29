@@ -4,12 +4,12 @@
 
 # DeepSeek API配置
 # 自定义部署的DeepSeek V3（当前使用） SSP
-# DEEPSEEK_API_KEY = "fca969a668494c828726c0395e797180"  # Token
+# DEEPSEEK_API_KEY = "XXXXXXXXXXXXXX"  # Token
 # DEEPSEEK_BASE_URL = "https://www.ssfssp.com:8888/ssp/openApi/GkfFhhUy/kvshB4Rh/LNslKxsF/v1"
 # DEEPSEEK_MODEL = "DeepSeek-V3"  # 注意：带连字符
 
 # DS官方平台（备用）
-DEEPSEEK_API_KEY = "sk-eb8dcd5229e74ce98c74d4e49c677754"
+DEEPSEEK_API_KEY = "XXXXXXXXXXXXX"
 DEEPSEEK_BASE_URL = "https://api.deepseek.com"
 DEEPSEEK_MODEL = "deepseek-chat"
 

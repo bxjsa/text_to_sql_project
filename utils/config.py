@@ -29,5 +29,5 @@ TOP_P = 0.95
 
 # 本地数据库
 MYSQL_USER = "root"
-MYSQL_PWD = "123456"
-MYSQL_DATABASE = "heating_meta"
+MYSQL_PWD = "XXXXXX"
+MYSQL_DATABASE = "XXXXXXX"

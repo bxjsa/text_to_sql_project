@@ -81,7 +81,9 @@ python /test/1_xxx.py
 ```
 ## 🤝 贡献与致谢
 感谢 Magic AI 团队成员的共同努力。 
+
 参考方案：DeepSeek-V2 , MCS-SQL.
+
 **主要贡献者：**
 * @bxjsa
 * @eoni0927-lab

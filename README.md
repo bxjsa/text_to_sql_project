@@ -13,7 +13,7 @@
 
 ## 📖 项目简介
 本项目聚焦于**能源供热领域的 Text-to-SQL 任务**。针对传统模型在处理行业专业术语、复杂表结构（Schema）以及逻辑推理时的痛点，我们提出了一套**基于硬约束混合检索与双重验证机制**的解决方案。
-本方案在比赛验证集中达到了 **98.667%** 的准确率，在复赛打榜中保持了 **92%** 的高准确率，拿到国家三等奖，省赛一等奖。
+本方案在比赛验证集中达到了 **98.667%** 的准确率，在复赛打榜中保持了 **92%** 的高准确率，拿到了国家三等奖，省赛一等奖。
 
 ## 🏗️ 核心架构
 我们的模型摒弃了传统的端到端生成，采用“迭代式 SQL 查询生成与验证”框架。
@@ -28,8 +28,7 @@
 
 2.  **数据表链接 (Hybrid Schema Linking)** 
     采用 **70% 关键词匹配 + 30% 语义匹配** 的加权混合检索策略
-    针对公式计算，设计了“公式锁定数据表”的硬约束规则，解决语义漂移问题。
-      
+    针对公式计算，设计了“公式锁定数据表”的硬约束规则，解决语义漂移问题。      
 
 3.  **Few-shot Chain-of-Thought (CoT)**
     不仅仅生成 SQL，还强制模型输出 `reason` (业务逻辑)、`columns` (涉及字段) 和 `SQL-Like` 中间表达，增强可解释性。
@@ -58,7 +57,7 @@
 ### 安装与运行
 ```bash
 # 1. 克隆项目
-git clone [https://github.com/你的用户名/项目名.git](https://github.com/你的用户名/项目名.git)
+git clone https://github.com/bxjsa/text_to_sql_project.git
 
 # 2. 安装依赖
 pip install -r requirements.txt
@@ -67,8 +66,8 @@ pip install -r requirements.txt
 # 在 config.py 中填入你的 API Key 和数据库连接信息
 
 # 4. 运行推理
-python main.py
-
+python /test/1_xxx.py
+```
 ## 📂 项目结构
 Plaintext
 

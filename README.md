@@ -28,19 +28,15 @@
 
 2.  **数据表链接 (Hybrid Schema Linking)** 
     采用 **70% 关键词匹配 + 30% 语义匹配** 的加权混合检索策略
-    * 针对公式计算，设计了“公式锁定数据表”的硬约束规则，解决语义漂移问题。
-    * 
-<img width="836" height="319" alt="RAG检索" src="https://github.com/user-attachments/assets/c4cbc4e9-48e4-4dbf-ab59-61e726649305" />
+    针对公式计算，设计了“公式锁定数据表”的硬约束规则，解决语义漂移问题。
+      
 
 3.  **Few-shot Chain-of-Thought (CoT)**
-    * 不仅仅生成 SQL，还强制模型输出 `reason` (业务逻辑)、`columns` (涉及字段) 和 `SQL-Like` 中间表达，增强可解释性。
+    不仅仅生成 SQL，还强制模型输出 `reason` (业务逻辑)、`columns` (涉及字段) 和 `SQL-Like` 中间表达，增强可解释性。
 
 4.  **双重验证与修正机制 (Dual Verification)** 
-    **第一重：语义检查**。基于 AST (抽象语法树) 进行静态分析，结合 M-Schema 校验字段存在性。
-    **第二重：执行检查**。在本地数据库试运行，捕获运行时错误（如空结果、逻辑冲突），并反馈给模型进行自我修正。
-    
-<img width="3792" height="2067" alt="语义检查" src="https://github.com/user-attachments/assets/3f7f0876-12fb-4f5e-a827-f44c716c9bbf" />
-<img width="845" height="321" alt="本地数据库运行" src="https://github.com/user-attachments/assets/e1a79d20-3843-4992-988f-f15148ed5fa1" />
+    **第一重：语义检查**: 基于 AST (抽象语法树) 进行静态分析，结合 M-Schema 校验字段存在性。
+    **第二重：执行检查**: 在本地数据库试运行，捕获运行时错误（如空结果、逻辑冲突），并反馈给模型进行自我修正。
 
 
 ## 📊 效果展示
@@ -82,6 +78,7 @@ Plaintext
 ├── test/               # 主程序入口
 ├── utils/              # 核心代码模块，含有config.py
 └── requirements.txt
+
 ## 🤝 贡献与致谢
 感谢 Magic AI 团队成员的共同努力。 参考方案：DeepSeek-V2 , MCS-SQL.
 @bxjsa

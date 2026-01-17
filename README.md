@@ -25,7 +25,7 @@
 
 1. **数据预处理 (Structured Pre-processing)**
    * **M-Schema**: 构建半结构化数据库模式，清晰展示表间层级与外键关系。
-   * **语义槽解析**: 将用户问题解构为 Entity, Target, Time 等原子单元，降低噪声。
+   * **语义槽解析**: 将参考示例的问题描述解构为 Entity, Target, Time 等语义词槽，其中target作为示例匹配时的关键词。
 
 2. **数据表链接 (Hybrid Schema Linking)**
    * 采用 **70% 关键词匹配 + 30% 语义匹配** 的加权混合检索策略。
